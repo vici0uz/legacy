@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="workshop_service_report_graph">
+            <field name="name">workshop.service.report.graph</field>
+            <field name="model">workshop.service.report</field>
+            <field name="arch" type="xml">
+                <graph string="Services" type="pivot" stacked="True">
+                    <field name="insurer_id" type="row"/>
+                    <field name="date_approved" interval="month" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_service_report_search">
+            <field name="name">workshop.service.report.search</field>
+            <field name="model">workshop.service.report</field>
+            <field name="arch" type="xml">
+                <search string="Services Analysis">
+                    <filter string="Trought Insurance Company" name="t_insurance" domain="[('t_insurance', '=', True)]"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="workshop_service_report_act">
+            <field name="name">Services Analitics</field>
+            <field name="res_model">workshop.service.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+            <field name="search_view_id" ref="workshop_service_report_search"/>
+            <field name="view_id" ref="workshop_service_report_graph"/>
+            <field name="context"> {'search_default_t_insurance':1}</field>
+            <field name="help">This report perform a Works Analysis</field>
+        </record>
+
+        <menuitem id="workshop_service_report_menu" sequence="100" action="workshop_service_report_act" parent="workshop_vehicle_dashboard_base_menu"/>
+
+    </data>
+</openerp>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+        <template id="aboutus" inherit_id="website.aboutus" customize_show="True" name="Adherent Insurance Company">
+            <xpath expr="//div[@class='oe_structure']" position="after">
+                <section class="container">
+                    <div class="col-sm-12 text-center" t-if="len(partner_ids)">
+                        <h2>Adherent Insurance Company</h2>
+                    </div>
+                    <!-- <t t-if="partner_ids.insurer.raw_value === true"> -->
+                    <div t-foreach="partner_ids" t-as="partner" class="col-sm-3 col-lg-2 mt16 text-center colsize">
+
+                        <t t-call="website.publish_management"><t t-set="object" t-value="partner"/></t>
+                        <div class="clearfix"/>
+                        <img t-att-src="website.image_url(partner, 'image_medium')" class="img shadow img-rounded"/>
+                        <div class="mt8">
+                            <strong t-field="partner.name"></strong>
+                        </div>
+                        <div t-field="partner.public_info" class="text-muted mt16"/>
+                    </div>
+                <!-- </t> -->
+                </section>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

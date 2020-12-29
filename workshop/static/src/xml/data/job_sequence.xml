@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <!-- Sequences for Job Number -->
+        <record id="seq_job_nox_type" model="ir.sequence.type">
+            <field name="name">Job Number</field>
+            <field name="code">job.numberx</field>
+        </record>
+
+        <record id="seq_job_nox" model="ir.sequence">
+            <field name="name">Job Number</field>
+            <field name="code">job.numberx</field>
+            <field name="prefix">S</field>
+            <field name="padding">6</field>
+        </record>
+
+        <!-- Sequences for Autopart Receive -->
+        <record id="sequence_autopart_receive_no_type" model="ir.sequence.type">
+            <field name="name">Order Number</field>
+            <field name="code">order_no.number</field>
+        </record>
+
+        <record id="sequence_autopart_receive_no" model="ir.sequence">
+            <field name="name">Order Number</field>
+            <field name="code">order_no.number</field>
+            <field name="prefix">R</field>
+            <field name="padding">6</field>
+        </record>
+
+    </data>
+</openerp>

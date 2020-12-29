@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_services_kanban_alarm_inh">
+            <field name="name">workshop.service.kanban.alarm.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="inherit_id" ref="workshop.view_services_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='additional_count']" position="after">
+                    <field name="alarm"/>
+                </xpath>
+                <xpath expr="//div[contains(@class, 'oe_kanban_bottom_right')]" position="before">
+                    <a t-if="record.alarm.raw_value" class="oe_kanban_status oe_kanban_status_red"></a>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_service_form_alarm_inh">
+            <field name="name">workshop.service.form.alarm.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="inherit_id" ref="workshop.workshop_service_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="vehicle_in" type="object" string="Vehicle Receiving" icon="STOCK_YES" class="oe_inline"/>
+                    <button name="detect_alarm" type="object" string="NO TOCAR" icon="STOCK_CANCEL" groups="workshop.group_workshop_super_manager"/>
+                </xpath>
+                <xpath expr="//form/sheet/group/group[1]" position="after">
+                    <group attrs="{'invisible': [('alarm_ids', '=', [] )]}" groups="workshop.group_workshop_manager">
+                        <field name="alarm_ids" nolabel="1" domain="[('active', '=', True)]" readonly="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_service_search_alarm_inh">
+            <field name="name">workshop.service.search.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="inherit_id" ref="workshop.workshop_service_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vehicle_ids']" position="after">
+                    <field name="alarm"/>
+                </xpath>
+                <xpath expr="filter[@string='Message Unread']" position="after">
+                    <filter name="alarm_true" string="Active Alarm" domain="[('alarm','=',True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</openerp>

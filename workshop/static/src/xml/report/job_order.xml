@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <template id="custom_layout">
+            <!-- Multicompany -->
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+             </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="report.external_layout_header" />
+            <t t-raw="0" />
+            <t t-call="workshop.custom_layout_footer"/>
+
+        </template>
+        <template id="custom_layout_footer">
+            <div class="footer">
+                <div class="renuncia">
+                    <p>Taller 777 no se hace responsable de los vehículos o de las piezas, que despues de 7 dias de su reparación no sean retirados.</p>
+                    <p>En el caso de que los mismos no sean retirados en el citado plazo, la firma procedera al cobro de una taza diaria correspondiente al estacionamiento, según las tarifas de la plaza.</p>
+                    <p>Declinamos igualmente toda responsabilidad por los objetos dejados en el vehiculo, cuya custodia no se nos hubiera encargado expresamente.</p>
+                    <p>Por la presente autorizo el trabajo arriba descripto junto con las piezas de repuestos y otros materiales necesarios para efectuarlos como asi tambien mi consentimiento para efectuar pruebas con el vehiculo las veces que crean necesarios.</p>
+                    <p>Taller 777 no se hace responsable por perdida de objetos que no forman parte del vehiculo o daños al mismo en caso de incendio, robo o cualquier otra causa fuera de control.</p>
+                </div>
+                <div class="aviso">
+                    <p><strong>IMPORTANTE:</strong> le agradecemos su encargo y le recordamos que su vehículo solo sera entregado con la presentación de esta contraseña. Conservela cuidadosamente, pues no asumimos ninguna responsabilidad por el uso indebido de la misma.</p>
+                    <p>Declinamos igualmente toda responsabilidad por los objetos en el vehículo, cuya custodia  no se nos hubiera encargado expresamente.</p>
+                </div>
+                <div class="firmas">
+                    <div class="lineas">
+                        <div class="col-xs-4 ">
+                            <p class="">________________________</p>
+                        </div>
+                        <div class="col-xs-4 ">
+                            <p>________________________</p>
+                        </div>
+                        <div class="col-xs-2 ">
+                            <p>________________</p>
+                        </div>
+                        <div class="col-xs-2 ">
+                            <p>________________</p>
+                        </div>
+                    </div>
+                    <div class="bajo-lineas">
+                        <div class="col-xs-4 ">
+                            <p>Firma</p>
+                        </div>
+                        <div class="col-xs-4 ">
+                            <p>Aclaración de Firma</p>
+                        </div>
+                        <div class="col-xs-2 ">
+                            <p>C.I.</p>
+                        </div>
+                        <div class="col-xs-2">
+                            <p>Fecha</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center custom_footer" style="border-top: 1px solid black;">
+                    <ul t-if="not company.custom_footer" class="list-inline">
+                        <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>
+
+                        <li t-if="company.fax and company.phone">&amp;bull;</li>
+                        <li t-if="company.fax">Fax: <span t-field="company.fax"/></li>
+
+                        <li t-if="company.email">&amp;bull;</li>
+                        <li t-if="company.email">Email: <span t-field="company.email"/></li>
+
+                        <li t-if="company.website">&amp;bull;</li>
+                        <li t-if="company.website">Website: <span t-field="company.website"/></li>
+                    </ul>
+
+                    <t t-if="company.custom_footer">
+                        <span t-raw="company.rml_footer"/>
+                    </t>
+
+                    <ul class="list-inline">
+                        <li>Page:</li>
+                        <li><span class="page"/></li>
+                        <li>/</li>
+                        <li><span class="topage"/></li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_workshop_service_job_order_document">
+            <t t-call="workshop.custom_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <!-- DATOS GENERALES -->
+                        <div class="col-xs-6 enc-order">
+                            <p >Orden de Entrada: <span t-field="o.job_no"/></p>
+                        </div>
+                        <div class="gral-style gral-data">
+                            <div class="col-xs-12 enc-gral">
+                                <p class="">Datos Generales</p>
+                            </div>
+                            <div class="">
+                                <div class="col-xs-8 celda-media">
+                                    <p>Cliente: <span t-field="o.partner_id"/></p>
+                                </div>
+                                <div class="col-xs-4 celda-media">
+                                    <p>Fecha de Entrega:</p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-xs-9 celda-media">
+                                    <p>Dirección: <span t-field="o.partner_id.street"/></p>
+                                </div>
+                                <div class="col-xs-3 celda-media">
+                                    <p>Telefono: <span t-field="o.partner_id.phone"/></p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-xs-3 celda-media">
+                                    <p>Celular: <span t-field="o.partner_id.mobile"/></p>
+                                </div>
+                                <div class="col-xs-4 celda-media">
+                                    <p>E-mail: <span t-field="o.partner_id.email"/></p>
+                                </div>
+                                <div class="col-xs-5 celda-media">
+
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-xs-2  celda-media">
+                                    <p>Marca: <span t-field="o.vehicle_ids.model_id.brand_id"/></p>
+                                </div>
+                                <div class="col-xs-3 celda-media">
+                                    <p>Modelo: <span t-field="o.vehicle_ids.model_id.modelname"/></p>
+                                </div>
+                                <div class="col-xs-2 celda-media">
+                                    <p>Year: <span t-field="o.vehicle_ids.year"/></p>
+                                </div>
+                                <div class="col-xs-3 celda-media">
+                                    <p>Chapa: <span t-field="o.vehicle_ids.license_plate"/></p>
+                                </div>
+                                <div class="col-xs-2 celda-media">
+                                    <p>Color: <span t-field="o.vehicle_ids.color"/></p>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="col-xs-3 celda-media">
+                                    <span t-if="o.t_insurance"  class=""><p class="encuadrar"><div class="cuadrado"/> Particular <div class="cuadrado fondo-negro"/> Seguro</p></span>
+                                    <span t-if="not o.t_insurance"  class=""><p class="encuadrar"><div class="cuadrado fondo-negro"/> Particular <div class="cuadrado"/> Seguro</p></span>
+                                </div>
+                                <div class="col-xs-5 celda-media">
+                                    <p style="font-size: 12px">Cia. de Seg: <span t-field="o.insurer_id"/></p>
+                                </div>
+                                <div class="col-xs-4 celda-media">
+                                    <p>Chassis: <span t-field="o.vehicle_ids.vin_sn"/></p>
+                                </div>
+                               <!--   -->
+                            </div>
+                            <div class="">
+                                <div class="col-xs-3 celda-media">
+                                    <p class="encuadrar">Alarma: Si<span class="relleno">_</span><div class="cuadrado"/> No <div class="cuadrado"/></p>
+                                </div>
+                                <div class="col-xs-5 celda-media">
+                                    <p class="">Posición de Alarma</p>
+                                </div>
+                                <div class="col-xs-4 celda-media">
+                                    <p>Km:</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    <!-- ITEMS -->
+                        <div class="tabla-items-wrapper">
+                            <div class="col-xs-12 table-items-top">
+                                <p>Items Observados</p>
+                            </div>
+                            <!-- TABLA -->
+                                <table class="table-items">
+                                    <thead>
+                                        <tr>
+                                            <th class="piece">Pieza</th>
+                                            <th class="check">Check</th>
+                                            <th>Dañado</th>
+                                            <th class="piece">Pieza</th>
+                                            <th class="check">Check</th>
+                                            <th>Dañado</th>
+                                            <th class="piece">Pieza</th>
+                                            <th class="check">Check</th>
+                                            <th>Dañado</th>
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td>
+                                            <p>Llave</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Acond. Aire</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Porta Maletas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Retrovisor Electrico</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Objetos en la guantera</p>
+                                        </td>
+                                         <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Señaleros Traseros</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Bocina</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Antena</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Objetos en la cajuela</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Limpia Parabrisas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Foco</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Techo Corredizo</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Extintor</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Faros Delanteros</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Baliza</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Batería</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Busca Huellas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Llave de ruedas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Alfombras</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Señaleros Delanteros</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Taza de Ruedas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Parabrisas</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Llantas de Magnesio</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Levanta Vidrios</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Consola</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Paragolpes Pintados</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Tapizados</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Arranque</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Alerón</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <p>Gato</p>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            <div class="col-xs-12 table-items-bottom">
+                                <p>Radio - CD ____________________________________ Si </p><div class="cuadrado"/> No <div class="cuadrado"/> Objetos en el Vehículo________________________________________
+                            </div>
+                        </div>
+                    <!-- OBSERVACIONES -->
+                        <br/>
+                        <div class="">
+                            <div class="col-xs-12 observaciones">
+                                <p>Observaciones:</p>
+                            </div>
+                        </div>
+                    <!-- CUBIERTAS -->
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="col-xs-12  contenedor-vacio">
+                            <table class="tabla-cubiertas">
+                                <thead>
+                                    <th>Cubierta Del. Der.</th>
+                                    <th>Cubierta Del. Izq.</th>
+                                    <th>Cubierta Tras. Der.</th>
+                                    <th>Cubierta Tras. Izq.</th>
+                                </thead>
+                                <tr>
+                                    <td>
+                                        <p> <div class="cuadrado"/> Bien <div class="cuadrado"/> Regular <div class="cuadrado"/> Mala </p>
+                                    </td>
+                                    <td>
+                                        <p> <div class="cuadrado"/> Bien <div class="cuadrado"/> Regular <div class="cuadrado"/> Mala </p>
+                                    </td>
+                                    <td>
+                                        <p> <div class="cuadrado"/> Bien <div class="cuadrado"/> Regular <div class="cuadrado"/> Mala </p>
+                                    </td>
+                                    <td>
+                                        <p> <div class="cuadrado"/> Bien <div class="cuadrado"/> Regular <div class="cuadrado"/> Mala </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    <!-- TRABAJOS -->
+                        <div class="col-xs-12 contenedor-vacio">
+                            <div class="super-encabezado-tabla-trabajos">
+                                <p>Descripción del Trabajo</p>
+                            </div>
+                            <table class="tabla-trabajos">
+                                <thead>
+                                    <tr class="fila-encabezado">
+                                        <th class="columna-partes">
+                                            <p>Parte</p>
+                                        </th>
+                                        <th class="columna-trabajo">
+                                            <p>Trabajo</p>
+                                        </th>
+                                        <th class="columna-observacion">
+                                            <p>Observación</p>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tr t-foreach="o.service_works_2" t-as="l">
+                                    <td >
+                                        <span t-field="l.fault_part_ids_2"/>
+                                    </td>
+                                    <td class="class2" >
+                                        <span t-field="l.work_2"/>
+                                    </td>
+                                    <td>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                 </div>
+            </t>
+        </template>
+
+        <template id="report_workshop_job_order_style" inherit_id="report.layout">
+            <xpath expr="//style" position="after">
+                <style type="text/css">
+                    .devel-blue {
+                        border: 1px solid black;
+                        background-color: blue;
+                    }
+                    .devel-pink {
+                        background-color: pink;
+                    }
+                    .contenedor-vacio {
+                        padding: 0px;
+                        }
+                    .relleno {
+                        color: white;
+                    }
+                    .encuadrar {
+                        display: inline-block;
+                    }
+                    .fondo-negro {
+                        background-color: black;
+                    }
+                    .cuadrado {
+                        height: 10px;
+                        width: 10px;
+                        border: 1px solid black;
+                        display: inline-block;
+                    }
+                    .lineas {
+                        margin-top: 20px;
+                    }
+                    .bajo-lineas p {
+                        line-height: 1px;
+
+                    }
+                    .firmas p {
+                        text-align: center;
+                    }
+                    .firmas {
+                        margin-top:2px;
+                        border-radius: 3px;
+                        height: 60px;
+                        border: 1px solid black;
+                        margin-bottom: 5px;
+                    }
+                    .aviso {
+                        margin-top:2px;
+                        height: 22px;
+                        border:1px solid black;
+                        border-radius: 3px;
+                    }
+                    .aviso p:first-child {
+                        margin-top: 4px;
+                    }
+                    .aviso p {
+                        font-size: 7px;
+                        line-height: 1px;
+                        padding: 0px;
+                        margin-left: 5px;
+                    }
+                    .renuncia {
+                        height: 53px;
+                        border: 1px solid black;
+                        border-radius: 3px;
+                    }
+
+                    .renuncia p {
+                        font-size: 7px;
+                        line-height: 1px;
+                        padding: 0px;
+                        margin-left: 5px;
+                    }
+                    .renuncia p:first-child {
+                        margin-top: 3px;
+                    }
+                    .super-encabezado-tabla-trabajos {
+                        border: 1px solid black;
+                        height: 22px;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 18px;
+                    }
+                    .columna-partes {
+                        width: 40%;
+                    }
+                    .columna-trabajo {
+                        width: 25%;
+                    }
+                    .columna-observacion {
+                        width: 35%;
+                    }
+                    .tabla-trabajos thead tr {
+                        height: 20px;
+                    }
+                    .tabla-trabajos th p {
+                        margin:0px;
+                        padding: 0px;
+                        font-size:18px;
+                        text-align: center;
+                    }
+                    .tabla-trabajos tr:nth-child(even){
+                        background-color: #F2F3F4;
+                        }
+
+                    .tabla-trabajos td  {
+                        height: 15px;
+                        border: 1px solid black;
+                        padding-left: 21px;
+                        width: 20%;
+                    }
+                    .tabla-trabajos {
+                        border-left: 1px solid black;
+                        border-right: 1px solid black;
+                        width: 100%;
+                        font-size: 16px;
+                    }
+                    .tabla-cubiertas th {
+                        text-align: center;
+                        height: 15px;
+                    }
+                    .tabla-cubiertas {
+                        width: 100%;
+                        border-top-left-radius: 5px;
+                        border-top-right-radius: 5px;
+                        border-left: 1px solid black;
+                        border-right: 1px solid black;
+                        border-top: 1px solid black;
+                        font-size: 12 px;
+                        text-align: center;
+                        height: 15px;
+                        overflow:hidden;
+                        border-collapse: initial;
+                    }
+                    .observaciones {
+                        border: 1px solid black;
+                        border-radius: 5px;
+                        height: 55px;
+                    }
+                    .table-items-bottom p {
+                        display: inline;
+                    }
+                    .table-items-bottom {
+                        border-bottom-left-radius: 5px;
+                        border-bottom-right-radius: 5px;
+                        border-left: 1px solid black;
+                        border-right: 1px solid black;
+                        border-bottom: 1px solid black;
+                        height: 16px;
+                        font-size: 12px;
+                        line-height:15px;
+                    }
+                    .table-items-top {
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 18px;
+                        height: 20px;
+                        border-top-left-radius: 5px;
+                        border-top-right-radius: 5px;
+                        border-left: 1px solid black;
+                        border-right: 1px solid black;
+                        border-top: 1px solid black;
+                    }
+                    .check {
+                        width: 5%;
+                    }
+                    .piece {
+                        width:16%;
+                    }
+                    .table-items{
+                        width: 100%;
+                    }
+                    .table-items p {
+                        padding: 0px;
+                        margin-bottom: 0px;
+                    }
+                    .table-items td {
+                        border: 1px solid black;
+                        font-size: 12px;
+                        height: 14px;
+                        padding: 0px;
+                    }
+                    .table-items th {
+                        border: 1px solid black;
+                        text-align: center;
+                    }
+                    .tabla-items-wrapper {
+                        margin-top: 3px;
+                    }
+                    .celda-final {
+                        font-size: 14px;
+                        height: 16px;
+                        line-height:13px;
+                    }
+                    .limpio {
+                        clear: left;
+                    }
+                    .enc-gral {
+                        height: 20px;
+                        font-size: 18px;
+                        line-height:18px;
+                        font-weight: bold;
+                        text-align: center;
+                        border-bottom: 1px solid black;
+                    }
+                    .celda-media {
+                        border-bottom: 1px solid black;
+                        font-size: 14px;
+                        height: 16px;
+                        line-height:13px;
+                    }
+                    .gral-data {
+                        clear: both;
+                        height: 117px;
+                        border-radius: 5px;
+                        border: 1px solid black;
+                    }
+                    .enc-order {
+                        float: right;
+                        text-align: right;
+                        height: 16px;
+                        font-weight: bold;
+                        font-size: 14px;
+                        line-height: 15px;
+                    }
+                </style>
+            </xpath>
+        </template>
+        <template id="workshop.report_workshop_service_job_order_file">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'workshop.report_workshop_service_job_order_document')"/>
+                </t>
+            </t>
+        </template>
+
+
+
+    </data>
+</openerp>

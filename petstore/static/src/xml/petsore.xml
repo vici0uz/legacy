@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="HomePageTemplate">
+        <div style="background-color: red;">This is some simple HTML</div>
+        <div>Hello<t t-esc="name"/></div>
+        <!-- <div>Hello<t t-esc="3+4"/></div> -->
+    </t>
+    <t t-name="ProductsWidget">
+        <div>
+            <t t-foreach="widget.products" t-as="product">
+                <span class="product_item" t-attf-style="background-color: {{widget.color}};">
+                    <t t-esc="product"/>
+                </span>
+                <br/>
+            </t>
+        </div>
+    </t>
+</templates>

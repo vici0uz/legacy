@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="hr_py_inh" model="ir.ui.view">
+            <field name="name">hr.employee.form.py</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Personal Information']/group[1]/group[1]" position="inside">
+                    <field name="cid" required="True"/>
+                    <!-- <field name="ruc"/> -->
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

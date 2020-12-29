@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!-- Vehicles -->
+    <!-- Vehicles by Year -->
+        <!-- Graph -->
+        <record model="ir.ui.view" id="workshop_vehicle_by_year_dashboard_graph">
+            <field name="name">workshop.vehicle.by.brand.year.dashboard.graph</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <graph string="Vehicles by Brand" version="7.0" type="pie">
+                        <field name="year"/>
+                        <field name="model_name"/>
+                </graph>
+            </field>
+        </record>
+        <!-- ACT -->
+        <record model="ir.actions.act_window" id="workshop_vehicle_by_year_dashboard_graph_act">
+            <field name="name">Vehicles by Production Year</field>
+            <field name="res_model">workshop.vehicle.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,tree</field>
+            <field name="view_id" ref="workshop_vehicle_by_year_dashboard_graph"/>
+            <field name="context">{'group_by_no_leaf':1,'group_by':['model_name']}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+    <!-- Vehicles by Model/Month -->
+        <!-- Graph -->
+        <record model="ir.ui.view" id="workshop_vehicle_dashboard_by_model_month_graph">
+            <field name="name">workshop.vehicle.dashboard.by.model.month.graph</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <graph string="Workshop Vehicle Models by Month" version="7.0" type="bar">
+                        <field name="month"/>
+                        <field name="vehicle_count" operator="+"/>
+                        <field name="model_name" group="True"/>
+                </graph>
+            </field>
+        </record>
+        <!-- ACT -->
+        <record model="ir.actions.act_window" id="workshop_vehicle_dashboard_by_model_month_graph_act">
+            <field name="name">Workshop Vehicle Models by Month</field>
+            <field name="res_model">workshop.vehicle.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,tree</field>
+            <field name="view_id" ref="workshop_vehicle_dashboard_by_model_month_graph"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_vehicle_by_model_tree">
+            <field name="name">workshop.vehicle.by.model</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <graph string="Vehicles by Model" version="7.0" type="bar">
+                    <field name="year"/>
+                    <field name="vehicle_count" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_vehicle_by_model_tree_act">
+            <field name="name">Workshop Vehicle by Model</field>
+            <field name="res_model">workshop.vehicle.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,form</field>
+            <field name="view_id" ref="workshop_vehicle_by_model_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+    <!-- Dashboard Vehicles Form -->
+        <!-- Form -->
+        <record model="ir.ui.view" id="workshop_vehicle_dashboard_form">
+            <field name="name">workshop.vehicle.dashboard.form</field>
+            <field name="model">board.board</field>
+            <field name="arch" type="xml">
+                <form string="Workshop Vehicles Dashboard" version="7.0">
+                    <board style="2-1">
+                        <column>
+                            <action name="%(workshop_vehicle_dashboard_tree_act)d" string="Vehicles"/>
+                            <action name="%(workshop_vehicle_dashboard_by_model_month_graph_act)d" string="Vehicles Models by Month"/>
+                        </column>
+                        <column>
+                            <action name="%(workshop_vehicle_by_model_tree_act)d" string="Vehicles by Production Year"/>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACT -->
+        <record model="ir.actions.act_window" id="workshop_vehicle_dashboard_act">
+            <field name="name">Vehicles</field>
+            <field name="res_model">board.board</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="workshop_vehicle_dashboard_form"/>
+            <!-- <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field> -->
+        </record>
+<!-- Services -->
+        <record model="ir.ui.view" id="workshop_services_dashboard_form">
+            <field name="name">Workshop Services</field>
+            <field name="model">board.board</field>
+            <field name="arch" type="xml">
+                <form string="Workshop Services" version="7.0">
+                    <board style="2-1">
+                        <column>
+                            <action name="%(workshop_services_act)d" string="Last Services"/>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+        <!-- ACT -->
+        <record model="ir.actions.act_window" id="workshop_service_dashboard_act">
+            <field name="name">Vehicle by Production Year</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">workshop.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+<!-- Reporting Menu -->
+        <!-- MENUBASE -->
+        <menuitem id="workshop_vehicle_dashboard_base_menu" name="Workshop Dashboard" sequence="9" parent="base.menu_reporting"/>
+        <!-- MENUITEM -->
+        <menuitem id="workshop_vehicle_dashboard" sequence="10" parent="workshop_vehicle_dashboard_base_menu" action="workshop_vehicle_dashboard_act"/>
+        <!-- MENUITEM -->
+        <menuitem id="workshop_service_dashboard" sequence="20" parent="workshop_vehicle_dashboard_base_menu" action="workshop_service_dashboard_act"/>
+
+    </data>
+</openerp>

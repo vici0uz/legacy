@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* workshop_alarm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-39748ab\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-01 23:09+0000\n"
+"PO-Revision-Date: 2015-06-01 19:08-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,active:0
+msgid "Active"
+msgstr "Activo"
+
+#. module: workshop_alarm
+#: view:workshop.service:workshop_alarm.workshop_service_search_alarm_inh
+msgid "Active Alarm"
+msgstr "Alarma Activa"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,case:0
+msgid "Alarm"
+msgstr "Alarma"
+
+#. module: workshop_alarm
+#: field:workshop.service,alarm_ids:0
+msgid "Alarms"
+msgstr "Alarmas"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: workshop_alarm
+#: view:workshop.service:workshop_alarm.workshop_service_form_alarm_inh
+msgid "NO TOCAR"
+msgstr "NO TOCAR"
+
+#. module: workshop_alarm
+#: selection:workshop.service.alarm,case:0
+msgid "No Images"
+msgstr "Caso creado sin imágenes."
+
+#. module: workshop_alarm
+#: selection:workshop.service.alarm,case:0
+msgid "No approval order"
+msgstr "Trabajo aprobado sin adjuntar orden de aprobación."
+
+#. module: workshop_alarm
+#: selection:workshop.service.alarm,case:0
+msgid "No received vehicle images"
+msgstr "Vehículo recibido sin imágenes de recepción."
+
+#. module: workshop_alarm
+#: field:workshop.service.alarm,service_id:0
+msgid "Service id"
+msgstr "Service id"
+
+#. module: workshop_alarm
+#: view:workshop.service:workshop_alarm.workshop_service_form_alarm_inh
+msgid "Vehicle Receiving"
+msgstr "Recibir Vehículo"
+
+#. module: workshop_alarm
+#: model:ir.model,name:workshop_alarm.model_workshop_service
+msgid "Vehicle Services"
+msgstr "Servicios"
+
+#. module: workshop_alarm
+#. openerp-web
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:7
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:21
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:38
+#, python-format
+msgid "workshop.service"
+msgstr "workshop.service"
+
+#. module: workshop_alarm
+#. openerp-web
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:20
+#, python-format
+msgid "workshop.service.form.alarm.inh"
+msgstr "workshop.service.form.alarm.inh"
+
+#. module: workshop_alarm
+#. openerp-web
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:6
+#, python-format
+msgid "workshop.service.kanban.alarm.inh"
+msgstr "workshop.service.kanban.alarm.inh"
+
+#. module: workshop_alarm
+#. openerp-web
+#: code:addons/workshop_alarm/static/src/xml/workshop_service_alarm_mod.xml:37
+#, python-format
+msgid "workshop.service.search.inh"
+msgstr "workshop.service.search.inh"

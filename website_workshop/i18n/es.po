@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* website_workshop
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-5d58b55\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-19 13:49+0000\n"
+"PO-Revision-Date: 2014-12-19 10:53-0400\n"
+"Last-Translator: Alan <alan.david507@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#. module: website_workshop
+#: view:website:website.aboutus view:website:website_workshop.index
+msgid "Adherent Insurance Company"
+msgstr "Compañias de Seguros Adheridas"
+
+#. module: website_workshop
+#: model:website.menu,name:website_workshop.menu_insurers
+msgid "Insurers"
+msgstr "Aseguradoras Adheridas"
+
+#. module: website_workshop
+#: view:website:website_workshop.index
+msgid "List of insurance companies adhered"
+msgstr "Somos taller autorizado de las siguientes compañias de seguros."
+
+#. module: website_workshop
+#: field:res.partner,parent_name:0
+msgid "Parent name"
+msgstr "Parent name"
+
+#. module: website_workshop
+#: model:ir.model,name:website_workshop.model_res_partner
+msgid "Partner"
+msgstr "Cliente"
+
+#. module: website_workshop
+#: field:res.partner,public_info:0
+msgid "Public Info"
+msgstr "Información publica"
+
+#. module: website_workshop
+#: model:ir.actions.act_url,name:website_workshop.action_open_website
+msgid "Website About"
+msgstr "Website About"

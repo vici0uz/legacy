@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <template id="report_workshopautopart_document">
+             <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p>Supplier Information:</p>
+                            <div t-field="o.partner_id" t-field-options='{"widget": "contact", "fields":["address", "name", "phone", "fax"],"no_marker": true}'/>
+                            <p t-if="o.partner_id.vat">RUC: <span t-field="o.partner_id.vat"/></p>
+                        </div>
+                    </div>
+                    <h2>
+                        <span>Order N°</span>
+                        <span t-field="o.name"/>
+                    </h2>
+                    <div class="row mt32 mb32" id="informations">
+                        <div class="col-xs-3">
+                            <strong>Date Ordered:</strong>
+                            <p t-field="o.date_order"/>
+                        </div>
+                        <div t-if="o.user_id.name" class="col-xs-3">
+                            <strong>Responsible:</strong>
+                            <p t-field="o.user_id.name"/>
+                        </div>
+                        <div t-if="o.service_id.n_incident" class="col-xs-3">
+                            <strong>Insurance Company:</strong>
+                            <p t-field="o.service_id.insurer_id.name"/>
+                        </div>
+                        <div t-if="o.service_id.n_incident" class="col-xs-3">
+                            <strong>Sinister Number:</strong>
+                            <p t-field="o.service_id.n_incident"/>
+                        </div>
+
+                    </div>
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th class="text-right">A. Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody class="workshop_tbody">
+                            <tr t-foreach="o.autopart_receiving_lot_ids" t-as="l">
+                                <td>
+                                    <span t-field="l.autopart_type_id"/>
+                                </td>
+                                <td class="text-right">
+                                    <span t-field="l.qty"/>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Vehicle:</th>
+                                <th>Chassis Number:</th>
+                                <th>Color:</th>
+                                <th>Year:</th>
+                            </tr>
+                        </thead>
+                        <tbody class="workshop_vehicle_tbody">
+                            <tr>
+                                <td>
+                                    <span t-field="o.vehicle_id.model_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.vehicle_id.vin_sn"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.vehicle_id.color"/>
+                                </td>
+                                <td>
+                                    <span t-field="o.vehicle_id.year"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                    <strong>Observations:</strong>
+                    <div t-if="o.observation">
+                        <span t-field="o.observation"/>
+                    </div>
+                    </p>
+                    <div class="oe_structure "/>
+                        <div class="row mt32 mb32 " id="responsible_info">
+                            <div class="col-xs-3">
+                                <strong>Dealer:</strong>
+                             <span t-field="o.responsible_id"/>
+                            </div>
+                        <div class="col-xs-3 pull-right">
+                            <strong>Sign:</strong>
+                            <span>______________</span>
+                        </div>
+                   </div>
+                </div>
+
+            </t>
+
+        </template>
+
+
+        <template id="report_workshopautopart_receiving">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'workshop.report_workshopautopart_document')"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

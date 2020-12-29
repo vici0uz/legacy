@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+
+        <record model="ir.ui.view" id="project_edit_project_workshop_project_inh">
+            <field name="name">project.project.form.inh</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="workshop_service_id"/>
+                    <field name="service_job_no"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_workshop_service_2_project_project">
+            <field name="name">Work</field>
+            <field name="res_model">project.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{'search_default_workshop_service_id': active_id}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add Services to this Partner.
+                </p>
+            </field>
+        </record>
+
+        <record id="workshop_service_form_project_inh" model="ir.ui.view">
+            <field name="name">workshop.service.form.project.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="priority">4</field>
+            <field name="inherit_id" ref="workshop.workshop_service_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button class="oe_inline oe_stat_button" icon="fa-cogs" type="action" name="%(workshop_project.act_workshop_service_2_project_project)d">
+                        <field string="Workshop" name="project_id_progress" widget="statinfo"/>
+                    </button>
+                </xpath>
+                <xpath expr="//form/sheet/notebook[2]" position="after">
+                    <notebook>
+                        <page string="Operational Cost">
+                            <group string="Approved Amounts"  col="1">
+                                <field name="case_ids" nolabel="1">
+                                    <tree string="Amounts" editable="bottom" class="workshop_project_class">
+                                        <field name="motive"/>
+                                        <field name="approved_amount"/>
+                                        <field name="case_t_insurance" style="width: 25%%"/>
+                                        <field name="case_n_incident"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="case_total" widget="monetary" class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </group>
+                            <group string="Labor Cost" col="1">
+                                <field name="labor_line" nolabel="1">
+                                    <tree string="Prueba2" editable="bottom">
+                                        <field name="labor_type" required="1"/>
+                                        <field name="employee_id"/>
+                                        <field name="partner_id" context="{'default_outsourced':True, 'default_supplier': True}" options="{'no_quick_create':True}"/>
+                                        <field name="labor_cost" required="1"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="service_labor_cost" widget="monetary" class="oe_subtotal_footer_separator" readonly="1" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+
+                            </group>
+
+                            <group string="Supplies" col="1">
+                                <!-- LEGACY -->
+                                <field name="supply_line" nolabel="1" attrs="{'invisible':[('supply_line','=',[])]}">
+                                    <tree string="Prueba" editable="bottom">
+                                        <!-- <field name="cost_type" required="1"/> -->
+                                        <field name="product_id" attrs="{}"/>
+                                        <field name="invoiced_amount"/>
+                                        <field name="cost_price" required="1"/>
+                                        <field name="subtotal_gain" readonly="1"/>
+                                        <field name="author" readonly="1"/>
+                                    </tree>
+                                </field>
+                                <!-- NEW -->
+                                <field name="supply_line_2" nolabel="1" attrs="{'invisible':[('supply_line','!=',[])]}">
+                                    <tree string="Prueba" editable="bottom">
+                                        <field name="product_id" on_change="product_id_change(product_id,qty,cost_price, invoiced_amount, context)" required="1"/>
+                                        <field name="qty"/>
+                                        <field name="invoiced_amount"/>
+                                        <field name="cost_price"/>
+                                        <field name="sub_gain"/>
+                                        <field name="author" readonly="1"/>
+                                    </tree>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="service_invoiced_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="service_supply_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="service_supply_gain" widget="monetary" class="oe_subtotal_footer_separator" readonly="1" options="{'currency_field': 'currency_id'}" groups="workshop.group_workshop_super_manager"/>
+                                </group>
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" groups="workshop.group_workshop_super_manager">
+                                <field name="service_gain_total" widget="monetary" class="oe_subtotal_footer_separator" options="{'currency_field': 'currency_id'}" />
+                            </group>
+                        </page>
+
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="base_view_partner_form_workshop_project_inh" model="ir.ui.view">
+            <field name="name">res.partner.form.workshop.project.inh</field>
+            <field name="model">res.partner</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Sales &amp; Purchases']/group/group[2]" position="inside">
+                    <field name="outsourced"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

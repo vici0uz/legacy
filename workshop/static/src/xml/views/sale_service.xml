@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+<!-- Form Heredado -->
+        <record id="sale_view_order_form_" model="ir.ui.view">
+            <field name="name">Sale Order Form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="service" on_change="on_change_service(images)"/>
+                </xpath>
+                <xpath expr="//form/sheet/notebook" position="inside">
+                    <page string="Images">
+                        <field name="images" widget="image_multi" nolabel="1" reandoly="1"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+<!-- Tree Quotations Heredado -->
+        <record id="sale_view_quotation_tree_" model="ir.ui.view">
+            <field name="name">Quotation Tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_quotation_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="service"/>
+                </field>
+            </field>
+        </record>
+<!-- Tree Orders Heredado -->
+        <record id="sale_view_order_tree_" model="ir.ui.view">
+            <field name="name">Sale Orders Tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="service"/>
+                </field>
+            </field>
+        </record>
+<!-- Search Heredado -->
+        <record id="sale_view_quotation_search_" model="ir.ui.view">
+            <field name="name">Sale Orders Search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="service" string="Service" filter_domain="[('service','ilike',self)]"/>
+                    <!-- <filter string="Service" icon="terp-document-new" name="service" domain="[('service','=',name)]"/> -->
+                </xpath>
+            </field>
+        </record>
+
+<!-- service 2 quotation -->
+        <record model="ir.actions.act_window" id="act_workshop_service_2_sale_order">
+            <field name="name">Services to Sale Orders</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_service': active_id}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add Sales Quotations to this Service
+                </p>
+            </field>
+        </record>
+
+<!-- service 2 order -->
+        <record model="ir.actions.act_window" id="act_workshop_service_2_order">
+            <field name="name">Services to Sale Orders</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_service': active_id}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to view the Sales Orders to this Service
+                </p>
+            </field>
+        </record>
+
+    </data>
+</openerp>

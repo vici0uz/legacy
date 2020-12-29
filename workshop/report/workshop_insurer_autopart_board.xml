@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="workshop_autopart_insurer_board_graph">
+            <field name="name">workshop.autopart.insurer.graph</field>
+            <field name="model">workshop.autopart.insurer</field>
+            <field name="arch" type="xml">
+                <graph string="Autopart Receiving" type="pivot" stacked="True">
+                    <field name="autopart_type_id" type="row"/>
+                    <field name="autopart_qty"/>
+                    <field name="date_order" interval="month" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_autopart_insurer_board_act">
+            <field name="name">Autopart Receiving Report</field>
+            <field name="res_model">workshop.autopart.insurer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="workshop_autopart_insurer_board_graph"/>
+            <field name="help">This report perform a Autopart Receiving Analysis.
+            </field>
+        </record>
+
+        <menuitem id="workshop_autopart_insurer_dashboard_menu" sequence="200" action="workshop_autopart_insurer_board_act" parent="workshop_vehicle_dashboard_base_menu"/>
+
+    </data>
+</openerp>

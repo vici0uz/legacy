@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="workshop_service_additional_form">
+            <field name="name">workshop.service.additional.form</field>
+            <field name="model">workshop.service.additional</field>
+            <field name="arch" type="xml">
+                <form string="Additional" version="7.0">
+                    <sheet>
+                        <div class="oe_title oe_left">
+                            <label for="additional_t_insurer" string="Through insurer?" class="oe_inline oe_edit_only"/>
+                            <field name="additional_t_insurer" class="oe_edit_only"/>
+                            <div attrs="{'invisible': [('additional_t_insurer','=',False)]}">
+                                <h2>
+                                    <label for="additional_n_incident" attrs="{'invisible': [('additional_t_insurer','=',False)]}"/>
+                                    <field name="additional_n_incident" placeholder="Incident Number" attrs="{'required': [('additional_t_insurer','=',True)]}"/>
+                                </h2>
+                            </div>
+                        </div>
+                        <group string="Works">
+                            <field name="additional_work_ids" nolabel="1">
+                                <tree string="Works" editable="bottom">
+                                    <field name="fault_part_ids"/>
+                                    <field name="work"/>
+                                    <field name="notes"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_service_additional_tree">
+            <field name="name">workshop.service.additional.tree</field>
+            <field name="model">workshop.service.additional</field>
+            <field name="arch" type="xml">
+                <tree string="Additionals" version="7.0" create="false" delete="false">
+                    <field name="additional_t_insurer"/>
+                    <!-- <field name="additional_n_incident" invisible="context.get('additional_t_insurer')==False"/> -->
+                    <field name="additional_n_incident" attrs="{'invisible':[('additional_t_insurer','=', False)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view"  id="workshop_service_additional_search">
+            <field name="name">workshop.service.additional.search</field>
+            <field name="model">workshop.service.additional</field>
+            <field name="arch" type="xml">
+                <search string="All Adittionals" version="7.0">
+                    <field name="parent_service_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_service_additional_act">
+            <field name="name">Additional</field>
+            <field name="res_model">workshop.service.additional</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="act_workshop_service_2_workshop_service_additional">
+            <field name="name">Additionals</field>
+            <field name="res_model">workshop.service.additional</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="workshop_service_additional_search"/>
+            <field name="context">{'search_default_parent_service_id': active_id}</field>
+            <!-- <field name="domain">[('state', 'not in', ('cancelled','done'))]</field> -->
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create new services.
+                </p>
+            </field>
+        </record>
+
+        <!-- <menuitem action="workshop_service_additional_act" parent="workshop_services_menu_root" id="workshop_service_additional_menu" groups="group_workshop_user" sequence="30"/> -->
+    </data>
+</openerp>

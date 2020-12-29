@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="workshop_service_multi_imageform_view" model="ir.ui.view">
+            <field name="name">workshop.service.multi_images.form.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="workshop.workshop_service_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook[1]" position="after">
+                    <notebook>
+                        <page string="To Budgeting">
+                            <group string="Images">
+                                <field name="multi_images" widget="image_multi" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Received Vehicle">
+                            <group string="Images" >
+                                <field name="multi_images_received" widget="image_multi" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Delivered Vehicle">
+                            <group string="Images">
+                                <field name="multi_images_delivered" widget="image_multi" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Related Documents" position="bottom">
+                            <group string="Attachments">
+                                <field name="attach_ids" nolabel="1" widget="many2many_binary"/>
+                            </group>
+                        </page>
+                        <page string="Documents received" position="bottom">
+                            <group string="Attachments">
+                                <field name="attach_ids_delivery" nolabel="1" widget="many2many_binary"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button class="oe_inline oe_stat_button" icon="fa-camera">
+                        <field string="Img Budgeting" name="counter_multimages" widget="statinfo"/>
+                    </button>
+                    <button class="oe_inline oe_stat_button" type="object" name="#" icon="fa-camera-retro">
+                        <field string="Img Received" name="counter_multimages_rec" widget="statinfo"/>
+                    </button>
+                    <button class="oe_inline oe_stat_button" icon="fa-photo">
+                        <field string="Img Delivered" name="counter_multimages_del" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

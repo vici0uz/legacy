@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+        <template id="assets_backend" name="workshop_multimages assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <!-- Interfaz -->
+                <link rel="stylesheet" href="/workshop_multimages/static/src/css/custom_styles.css"/>
+                <link rel="stylesheet" href="/workshop_multimages/static/src/css/hoverbox.css"/>
+                <script type="text/javascript" src="/workshop_multimages/static/src/js/workshop_multi_image.js"/>
+                <!-- lightbox -->
+                <link rel="stylesheet" href="/workshop_multimages/static/lib/lightbox/css/lightbox.css"/>
+                <script type="text/javascript" src="/workshop_multimages/static/lib/lightbox/js/jquery.lightbox.js"/>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

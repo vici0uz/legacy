@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="report_workshop_service_job_order"
+            string="Job Order"
+            model="workshop.service"
+            report_type="qweb-pdf"
+            file="workshop.report_workshop_service_job_order_file"
+            name="workshop.report_workshop_service_job_order_file"
+            />
+
+    </data>
+</openerp>

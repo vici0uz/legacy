@@ -1,0 +1,103 @@
+.prueba {
+    color: red;
+}
+.oe_workshop_date{
+  border-top-left-radius:3px;
+  border-top-right-radius:3px;
+  font-size: 48px;
+  height: auto;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom:-7px;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  background-color: #8A89BA;
+}
+.oe_workshop_time{
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+  font-size: 12px;
+  border-collapse: separate;
+  text-align: center;
+  font-weight: bold;
+  color: #8A89BA;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.oe_workshop_month_year{
+  border-bottom-left-radius:3px;
+  border-bottom-right-radius:3px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #8A89BA;
+}
+
+/*.no_of_seats{
+    width:35px;
+}
+*/
+.oe_mapbox
+{
+    position: relative;
+    float: right;
+    height:200px;
+    width:256px;
+    border: 1px solid #eeeeee;
+}
+/*.oe_unsubscribe, .oe_unsubscribe_button:hover span {
+   display: none;
+ }
+.oe_unsubscribe_button:hover .oe_unsubscribe {
+   display: inline;
+ }
+*/
+
+/*.openerp .oe_button.oe_link span:hover {
+  text-decoration: underline;
+}
+.openerp .oe_webclient .oe_wstar_on, .openerp .oe_webclient .oe_wstar_off {
+  color: #cccccc;
+  text-shadow: 0 0 2px black;
+  vertical-align: top;
+  position: relative;
+  top: -8px;
+}
+.openerp .oe_webclient .oe_wstar_on:hover, .openerp .oe_webclient .oe_wstar_off:hover {
+  text-decoration: none;
+}
+.openerp .oe_webclient .oe_wstar_on {
+  color: gold;
+}
+*/
+.openerp .oe_kanban_status_purple {
+  background: purple;
+  background-position: center center;
+  background-image: -webkit-radial-gradient(circle, #D71CFC 0%, #A01CBA 40%, #85169B 100%);
+  background-image: -moz-radial-gradient(#D71CFC 0%, #A01CBA 40%, #85169B 100%);
+  background-image: -ms-radial-gradient(#D71CFC 0%, #A01CBA 40%, #85169B 100%);
+  background-image: radial-gradient(circle, #D71CFC 0%, #A01CBA 40%, #85169B 100%);
+}
+.openerp .oe_kanban_status_blue {
+  background: blue;
+  background-position: center center;
+  background-image: -webkit-radial-gradient(circle, #70ADE6 0%, #126EC5 40%, #175997 100%);
+  background-image: -moz-radial-gradient(#70ADE6 0%, #126EC5 40%, #175997 100%);
+  background-image: -ms-radial-gradient(#70ADE6 0%, #126EC5 40%, #175997 100%);
+  background-image: radial-gradient(circle, #70ADE6 0%, #126EC5 40%, #175997 100%);
+}
+
+/*.prueba {
+  border-radius: 2px solid black;
+}
+*/
+.nutria_style {
+  background-color: black;
+}
+
+./*rejilla {
+  background-color: #FC0;
+  border: 1px solid #333;
+}*/

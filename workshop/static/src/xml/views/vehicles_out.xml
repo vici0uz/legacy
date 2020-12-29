@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="vehicles_out_tree">
+            <field name="name">vehicles.out.tree</field>
+            <field name="model">workshop.out</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicles" version="7.0">
+                    <field name="name"/>
+                    <field name="date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vehicles_out_form">
+            <field name="name">vehicles.out.form</field>
+            <field name="model">workshop.out</field>
+            <field name="arch" type="xml">
+                <form string="Vehicles" version="7.0">
+                    <sheet>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="vehicles_out_kanban">
+            <field name="name">vehicles.out.kanban</field>
+            <field name="model">workshop.out</field>
+            <field name="arch" type="xml">
+                <kanban string="" version="7.0">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_module_vignette">
+                                <a type="open" class="oe_module_icon">
+                                    <div class="oe_workshop_date"><t t-esc="record.date.raw_value.getDate()"/></div>
+                                    <div class="oe_workshop_month_year">
+                                        <t t-esc="record.date.raw_value.toString('MMM')"/>
+                                        <t t-esc="record.date.raw_value.getFullYear()"/>
+                                    </div>
+                                    <div class="oe_workshop_time"><t t-esc="record.date.raw_value.toString('hh:mm tt')"/></div>
+                                </a>
+                                <div class="oe_module_desc">
+                                    <h4><a type="open"><field name="name"/></a></h4>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_out_act">
+            <field name="name">Vehicles</field>
+            <field name="res_model">workshop.out</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="workshop_out_act" parent="workshop_vehicles" id="workshop_out_menu"/>
+
+    </data>
+</openerp>

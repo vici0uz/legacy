@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="report_workshop_autopart_receiving"
+            string="Autopart Receiving"
+            model="workshop.autopart.receiving"
+            report_type="qweb-pdf"
+            file="workshop.report_workshopautopart_receiving"
+            name="workshop.report_workshopautopart_receiving"
+            />
+
+    </data>
+</openerp>

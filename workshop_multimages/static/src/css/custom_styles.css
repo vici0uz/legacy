@@ -1,0 +1,64 @@
+.boton {
+    color: rgb(255,255,255) !important;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/fonts/glyphicons-halflings-regular.eot');
+  src: url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/fonts/glyphicons-halflings-regular.woff') format('woff'), url('http://netdna.bootstrapcdn.com/bootstrap/3.1.1/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-plus:before {
+  content: "\2b";
+}
+.glyphicon-upload:before {
+  content: "\e027";
+}
+.glyphicon-ban-circle:before {
+  content: "\e090";
+}
+.glyphicon-trash:before {
+  content: "\e020";
+}
+.glyphicon-cloud-download:before {
+  content: "\e197";
+}
+.glyphicon-folder-open:before {
+  content: "\e118";
+}
+.glyphicon-eye-open:before {
+  content: "\e105";
+}
+
+.add-button {
+    background-color: rgb(92, 184, 92) !important;
+    border-color: rgb(76, 174, 76) !important;
+}
+
+.default-button {
+    background-color: #7C7BAD !important;
+    border-color: #5F8BFF !important;
+}
+
+.prueba{
+    background-color: green;
+}

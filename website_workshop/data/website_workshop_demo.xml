@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="base.partner_root" model="res.partner">
+            <field name="website_published" eval="True"/>
+            <field name="public_info">Sorete</field>
+        </record>
+
+    </data>
+</openerp>

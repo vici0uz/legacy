@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!-- Recepcion de Autopiezas -->
+    <!-- Tree -->
+        <record model="ir.ui.view" id="workshop_autopart_receive_tree">
+            <field name="name">workshop.autopart.receiving.tree</field>
+            <field name="model">workshop.autopart.receiving</field>
+            <field name="arch" type="xml">
+                <tree string="Autopart Receiving" version="7.0">
+                    <field name="date_order"/>
+                    <field name="name"/>
+                    <field name="vehicle_id"/>
+                    <field name="insurer_name"/>
+                    <field name="partner_id"/>
+                    <field name="autopart_receiving_lot_ids"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Search -->
+        <record model="ir.ui.view" id="workshop_autopart_receive_search">
+            <field name="name">workshop.autopart.receiving.search</field>
+            <field name="model">workshop.autopart.receiving</field>
+            <field name="arch" type="xml">
+                <search string="All Autoparts" version="7.0">
+                    <field name="name" filter_domain="[('name','ilike',self)]" string="Order"/>
+                    <field name="service_id"/>
+                    <filter name="received" domain="[('state', '=', 'done')]" string="Recibido"/>
+                </search>
+            </field>
+        </record>
+    <!-- Form -->
+        <record model="ir.ui.view" id="workshop_autopart_receive_form">
+            <field name="name">workshop.autopart.receiving.form</field>
+            <field name="model">workshop.autopart.receiving</field>
+            <field name="arch" type="xml">
+                <form string="Autopart Receiving" version="7.0">
+                    <header>
+                        <button name="cancel" type="object" string="Anular" icon="STOCK_CANCEL" class="oe_form_readonly oe_highlight" states="done"/>
+                        <field name="state" widget="statusbar"  statusbar_visible="done,cancelled"/>
+                    </header>
+                    <sheet>
+                        <!-- <field name="state" invisible="1"/> -->
+                        <div class="oe_right">
+                            <div id="buttons">
+                            <!-- <button name="notify_state" type="object" string="Autopart Probe"/> -->
+                            </div>
+                        </div>
+                        <h1>
+                            <label string="Order"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <label for="date_order" />
+                        <field name="date_order" class="oe_inline"/>
+                    <group col="2">
+                        <group string="Sinister Details">
+                            <field name="service_id" attrs="{'readonly': [('state','=','done')]}"/>
+                            <field name="vehicle_id" domain="[('service_ids','=',service_id)]" context="{'default_service_ids': service_id}" attrs="{'readonly': [('state','=','done')]}"/>
+                            <field name="observation"  placeholder="Write here all other information relative to this Autopart Receiving"/>
+                            <field name="insurer_name"/>
+                            <field name="n_incident_rel"/>
+                        </group>
+                        <group string="Supplier Details">
+                            <field name="responsible_id" placeholder="Responsible" attrs="{'readonly': [('state','=','done')]}"/>
+                            <field name="partner_id" domain="[('supplier', '=', True)]" required="1" attrs="{'readonly': [('state','=','done')]}"/>
+                            <field name="insurer_id_phone_number"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <field name="autopart_receiving_lot_ids"  nolabel="1">
+                                <!-- <field name="autopart_receiving_lot_ids"  nolabel="1" attrs="{'readonly': [('state','=','done')]}"> -->
+                                    <tree string="Autoparts" editable="bottom" >
+                                        <field name="autopart_type_id" options="{'no_quick_create':True,'no_create':True}"/>
+                                        <field name="qty"/>
+                                    </tree>
+                                </field>
+                            </group>
+                    </page>
+                </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <!-- ACT -->
+        <record model="ir.actions.act_window" id="workshop_autopart_receive_act">
+            <field name="name">Autopart Receiving</field>
+            <field name="res_model">workshop.autopart.receiving</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="workshop_autopart_receive_search"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to Autoparts Receiving
+                </p>
+            </field>
+        </record>
+
+         <!-- Workshop Service 2 Autopart Receiving -->
+        <record model="ir.actions.act_window" id='act_workshop_service_2_receive_act'>
+            <field name="name">Autoparts Receiving to this Service</field>
+            <field name="res_model">workshop.autopart.receiving</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_service_id': active_id}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to receiving Autoparts.
+                </p>
+            </field>
+        </record>
+
+        <!-- ACT -->
+<!--             <record model='ir.actions.act_window' id='workshop_autopart_act'>
+                <field name="name">Autoparts</field>
+                <field name="res_model">workshop.vehicle</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">kanban,tree,form</field>
+                <field name="search_view_id" ref="workshop_vehicle_search"/>
+                <field name="context">{'reg_type': 1}</field>
+                <field name="domain">[('reg_type', '=', True)]</field>
+                <field name="help" type="html">
+                    <p class="oe_view_nocontent_create">
+                        Click to create a new Autopart.
+                    </p>
+                </field>
+            </record>
+ -->
+    <!-- Tipo Autoparte -->
+        <!-- Tree -->
+            <record model='ir.ui.view' id='workshop_autopart_type_tree'>
+                <field name="name">workshop.autopart.type.tree</field>
+                <field name="model">workshop.autopart.type</field>
+                <field name="arch" type="xml">
+                    <tree string="Autopart Types" version="7.0" editable="top">
+                        <field name="name"/>
+                        <field name="tag_ids" widget="many2many_tags"/>
+                        <field name="author" readonly="1"/>
+                        <field name="create_date" invisible="1"/>
+                    </tree>
+                </field>
+            </record>
+        <!-- Search -->
+            <record model="ir.ui.view" id="workshop_autopart_type_sarch">
+                <field name="name">workshop.autopart.type.search</field>
+                <field name="model">workshop.autopart.type</field>
+                <field name="arch" type="xml">
+                    <search string="Autopart Types">
+                        <field name="name" filter_domain="[('name','ilike',self)]" string="Autopart"/>
+                        <field name="author"/>
+                    </search>
+                </field>
+            </record>
+        <!-- Form -->
+            <record model='ir.ui.view' id='workshop_autopart_type_form'>
+                <field name="name">workshop.autopart.type.form</field>
+                <field name="model">workshop.autopart.type</field>
+                <field name="arch" type="xml">
+                    <form string="Autopart Types" version="7.0">
+                        <sheet>
+                            <!-- <header>
+                                <button name="create_autopart_cat" string="Create Category" type="object" invisible="1"/>
+                                <button name="create_all_autopart_cats" string="Set Tree" type="object" invisible="1"/>
+                            </header> -->
+                            <field name="name"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </sheet>
+                    </form>
+                </field>
+            </record>
+        <!-- ACT -->
+        <record model='ir.actions.act_window' id='workshop_autopart_type_act'>
+            <field name="name">Autopart Types</field>
+            <field name="res_model">workshop.autopart.type</field>
+            <field name="search_view_id" ref="workshop_autopart_type_sarch"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new autopart type.
+                </p>
+            </field>
+        </record>
+
+
+    <!-- Services to Autopart Receiving -->
+    <!-- Tree -->
+
+        <record model="ir.ui.view" id="workshop_autopart_receiving_responsible_tree">
+            <field name="name">workshop.autopart.receiving.responsible.tree</field>
+            <field name="model">workshop.autopart.receiving.responsible</field>
+            <field name="arch" type="xml">
+                <tree string="Responsibles" version="7.0" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_workshop_autopart_receiving_responsible">
+            <field name="name">Responsibles</field>
+            <field name="res_model">workshop.autopart.receiving.responsible</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new Responsible
+                </p>
+            </field>
+        </record>
+
+<!-- Menus -->
+    <!-- Menu Padre -->
+    <menuitem name="Autoparts" parent="menu_root" id="workshop_autopart_menu" sequence="30" groups="group_workshop_user"/>
+        <!-- Autoparte -->
+        <menuitem action="workshop_autopart_receive_act" id="workshop_autopart_receive_menu" parent="workshop_autopart_menu"/>
+        <!-- <menuitem action="workshop_autopart_act" id="workshop_autopart_menu" parent="workshop_autopart" groups="group_workshop_user"/> -->
+        <!-- Tipo -->
+        <menuitem action="workshop_autopart_type_act" id="workshop_autopart_type_menu" parent="workshop_configuration" sequence="40" groups="group_workshop_super_manager"/>
+        <menuitem action="act_workshop_autopart_receiving_responsible" id="workshop_autopart_receiving_responsible_menu" parent="workshop_configuration" sequence="50" groups="group_workshop_user" />
+
+    </data>
+</openerp>

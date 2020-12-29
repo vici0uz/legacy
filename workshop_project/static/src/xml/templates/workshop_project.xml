@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <template id="assets_backend" name="workshop_project assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/workshop_project/static/src/css/workshop_project_styles.css"/>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>

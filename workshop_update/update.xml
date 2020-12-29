@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+
+        <record id="workshop_update_inh" model="ir.ui.view">
+            <field name="name">workshop.update.inh</field>
+            <field name="model">workshop.service</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="workshop.workshop_service_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook[3]" position="">
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

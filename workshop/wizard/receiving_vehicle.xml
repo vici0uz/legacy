@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_receiving_vehicle_comp" model="ir.ui.view">
+            <field name="name">Receiving Vehicle</field>
+            <field name="model">receiving.vehicle.comp</field>
+            <field name="arch" type="xml">
+                <form string="Vehicles to Receive" version="7.0">
+                    <p class="oe_grey">
+                        Select vehicles to receive in workshop.
+                    </p>
+                    <group>
+                        <field name="vehicle_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_receiving_vehicle_create">
+            <field name="name">Receiving Vehicle</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">receiving.vehicle.comp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

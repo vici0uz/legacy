@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="workshop_vehicle_report_graph" model="ir.ui.view">
+            <field name="name">workshop.vehicle.report.graph</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <graph string="Workshop" type="pivot" stacked="True">
+                    <field name="brand_id_rel" type="row"/>
+                    <field name="date_rec" interval="month" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_vehicle_report_search">
+            <field name="name">workshop.vehicle.report.search</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <search string="Workshop Analysis">
+                    <filter string="Has Entered" name="has_entered" domain="[('has_entered', '=', True)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_vehicle_report_act">
+            <field name="name">Vehicles by Brand</field>
+            <field name="res_model">workshop.vehicle.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+            <field name="search_view_id" ref="workshop_vehicle_report_search"/>
+            <field name="view_id" ref="workshop_vehicle_report_graph"/>
+            <field name="context">{'search_default_has_entered':1}</field>
+            <field name="help">This report perform a workshop analysis by brand and month.
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="workshop_vehicle_report_by_year_graph">
+            <field name="name">workshop.vehicle.report.year.graph</field>
+            <field name="model">workshop.vehicle.report</field>
+            <field name="arch" type="xml">
+                <graph string="Vehicles by Year" type="bar" stacked="True">
+                        <field name="year" type="year"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="workshop_vehicle_report_by_year_act">
+            <field name="name">Workshop Vehicles by Year</field>
+            <field name="res_model">workshop.vehicle.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+            <field name="search_view_id" ref="workshop_vehicle_report_search"/>
+            <field name="view_id" ref="workshop_vehicle_report_by_year_graph"/>
+            <field name="context">{'search_default_has_entered':1}</field>
+            <field name="help">This report perform a workshop analysis by year.
+            </field>
+        </record>
+
+
+        <!-- Base Menu -->
+        <menuitem id="workshop_vehicle_dashboard_base_menu" name="Workshop Dashboard" sequence="9" parent="base.menu_reporting"/>
+        <menuitem id="workshop_vehicle_report_menu" sequence="10" action="workshop_vehicle_report_act" parent="workshop_vehicle_dashboard_base_menu"/>
+        <menuitem id="workshop_vehicle_report_by_year_menu" sequence="20" action="workshop_vehicle_report_by_year_act" parent="workshop_vehicle_dashboard_base_menu"/>
+
+    </data>
+</openerp>

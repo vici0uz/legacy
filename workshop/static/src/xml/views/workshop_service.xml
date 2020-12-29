@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+<!-- Registro de Servicios -->
+    <!-- Tree -->
+        <record model='ir.ui.view' id='workshop_service_tree'>
+            <field name="name">workshop.service.tree</field>
+            <field name="model">workshop.service</field>
+            <field name="arch" type="xml">
+               <tree string="Services logs" version="7.0" fonts="bold:message_unread==True" colors="grey:state == 'cancelled';blue:state in('draft');red:state=='finalized'">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="partner_id"/>
+                    <field name="vehicle_ids"/>
+                    <field name="job_no"/>
+                    <field name="insurer_id"/>
+                    <field name="n_incident"/>
+                    <field name="date_rec"/>
+                    <!-- <field name="progress_rate" widget="progressbar"/> -->
+                    <field name="state"/>
+                    <field name="author"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Form -->
+        <record model='ir.ui.view' id='workshop_service_form'>
+            <field name="name">workshop.service.form</field>
+            <field name="model">workshop.service</field>
+            <field name="arch" type="xml">
+                <form string="Service" version="7.0">
+                    <header>
+                        <!-- Borrador -->
+                            <button name="action_set_approved" states="draft" string="Set as approved" type="object" class="oe_highlight oe_form_readonly" icon="gtk-yes"/>
+                            <!-- <button name="action_set_partially_approved" type="object" states="draft" string="Set as partially Approved"  class="oe_highlight oe_form_readonly" icon="gtk-paste-v"/> -->
+                            <button name="action_cancel" states="draft" string="Cancel" type="object" class="oe_form_readonly" icon="STOCK_CANCEL"/>
+                        <!-- Aprobado -->
+                            <button name="action_draft" states="papproved,approved,pending,done,cancelled" string="Set to draft" type="object" icon="STOCK_CONVERT"/>
+                        <!-- Pendiente -->
+                            <button name="action_set_pending" states="approved" string="To Finalize" type="object" icon="STOCK_MEDIA_FORWARD"/>
+                        <!-- Finalizado -->
+                            <button name="action_set_done" string="Set to done" type="object" states="pending" groups="workshop.group_workshop_super_manager"/>
+                            <!-- <button name="action_prueba" string="No tocar ;)" type="object" icon="STOCK_CANCEL"/> -->
+                        <!-- Status -->
+                            <field name="state" widget="statusbar" statusbar_visible="draft, approved" statusbar_colors='{"draft":"grey","approved":"green","cancelled":"red"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title oe_left">
+                            <div class="oe_edit_only">
+                                <label for="partner_id"/>(<field name="t_insurance" class="oe_inline"/>
+                                <label for="t_insurance" string="Is repaired through a Insurance Company?"/>)
+                            </div>
+                            <h1>
+                                <field name="partner_id" default_focus="1" options="{'no_quick_create':True}"/>
+                            </h1>
+                            <!-- Compañia -->
+                            <div attrs="{'invisible': [('t_insurance','=',False)]}">
+                                <h2>
+                                    <field name="insurer_id" placeholder="Insurance Company" style="width: 75%%" domain="[('insurer', '=', True)]" context="{'default_is_company': True, 'default_insurer': True, 'default_supplier': True}" attrs="{'required':[('t_insurance', '=', True)]}" options="{'no_quick_create':True}"/>
+                                </h2>
+                            <!-- Incidente -->
+                                <h3>
+                                    <field name="n_incident"  placeholder="Incident Number" style="width: 75%%" attrs="{'required':[('t_insurance', '=', True)]}"/>
+                                </h3>
+                            </div>
+                            <!-- Etiquetas -->
+                            <field name="tag_ids" style="width: 30%%" widget="many2many_tags" placeholder="Tags"/>
+                        </div>
+                        <div class="oe_right oe_button_box" name="buttons">
+                            <!-- Autopartes Recibidas -->
+                            <button class="oe_inline oe_stat_button" type="action" name="%(workshop.act_workshop_service_2_receive_act)d" icon="fa-wrench">
+                                <field string="Receiving Orders" name="autopart_count" widget="statinfo"/>
+                            </button>
+                            <!-- Presupuestos Relacionados -->
+                            <button class="oe_inline oe_stat_button" type="action" name="%(workshop.act_workshop_service_2_sale_order)d" icon="fa-file-text"/>
+                        <!-- <button class="oe_inline oe_stat_button" type="object" icon="fa-edit"  context="{'default_partner_id': insurer_id}"/> -->
+                        </div>
+                        <group col="2">
+                            <group string="Service Details" name="service_details">
+                                <field name="job_no" attrs="{'required':['|',('state', '=', 'approved'),('t_insurance','=',False)]}" style="width:25%%"/>
+                                <field name="date_rec"/>
+                                <!-- <field name="vehicle_id_color"/> -->
+                            </group>
+                        </group>
+                        <group >
+                            <field name="notes"/>
+                        </group>
+                        <notebook>
+                             <page string="Vehicles">
+                                <field name="vehicle_ids" domain="[('partner_id','=',partner_id)]" context="{'default_partner_id': partner_id}">
+                                    <tree version="7.0" colors="green:state == 'vehicle_in';red:state=='vehicle_out'">
+                                        <field name="model_id"/>
+                                        <field name="vin_sn"/>
+                                        <!-- <button name="receiving_vehicle" string="Receiving Vehicle" type="object" icon="STOCK_GOTO_LAST" /> -->
+                                        <field name="license_plate"/>
+                                        <field name="type"/>
+                                        <field name="color"/>
+                                        <field name="year"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook >
+                            <page string="Works">
+                                <group string="Works">
+                                    <group>
+                                        <field name="service_works_2" nolabel="1">
+                                            <tree string="Works" editable="bottom" fonts="bold:received==True">
+                                                <field name="fault_part_ids_2"  options="{'no_quick_create':True,'no_create':True}"/>
+                                                <field name="work_2"/>
+                                                <button name="set_autopart_state" type="object" icon="STOCK_GOTO_LAST" />
+                                                <field name="received" invisible="1"/>
+                                                <field name="damage_level" invisible="1"/>
+                                                <field name="t_insurance_additional" on_change="onchange_t_aditional"/>
+                                                <field name="n_incident_additional" attrs="{'invisible':[('t_insurance_additional','=',False)],'readonly':[('t_insurance_additional','=',False)],'required':[('t_insurance_additional','=',True)]}" />
+                                                <field name="state" readonly="1"/>
+
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Additional" attrs="{'invisible':[('additional','=', [] )]}">
+                                <group string="Additional">
+                                    <field name="additional" nolabel="1" context="{'default_additional_n_incident': n_incident}" string="Additionals" readonly="1">
+                                        <tree string="Works">
+                                            <field name="additional_t_insurer" invisible="1"/>
+                                            <field name="additional_work_ids"/>
+                                            <field name="additional_n_incident" attrs="{'invisible':[('additional_t_insurer','=', False)]}"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+
+                        </notebook>
+                        <!-- OBSOLETO -->
+                        <notebook attrs="{'invisible':[('service_works','=', [] )]}">
+                            <page string="Works (Deprecated)">
+                                <group string="Works (Deprecated)">
+                                    <group>
+                                        <field name="service_works" nolabel="1">
+                                            <form string="Works" version="7.0">
+                                                <group>
+                                                    <group>
+                                                        <field name="fault_part_ids" widget="many2many_tags"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="work"/>
+                                                    </group>
+                                                </group>
+
+                                            </form>
+                                            <tree string="Works">
+                                                <field name="fault_part_ids">
+                                                    <tree>
+                                                        <field name="name" widget="many2many_tags"/>
+                                                    </tree>
+                                                </field>
+                                                <field name="work"/>
+                                            </tree>
+                                        </field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <group string="Repair Progress">
+                            <field name="expected_date"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    <!-- Search -->
+        <record model="ir.ui.view" id="workshop_service_search">
+            <field name="name">workshop.service.registry.search</field>
+            <field name="model">workshop.service</field>
+            <field name="arch" type="xml">
+                <search string="All Services" version="7.0">
+                    <field name="name" filter_domain="[('name','ilike',self)]" string="Service"/>
+                    <field name="partner_id"/>
+                    <field name="job_no"/>
+                    <field name="n_incident"/>
+                    <field name="author"/>
+                    <field name="insurer_id"/>
+                    <field name="vehicle_ids"/>
+                    <field name="vehicle_ids_color"/>
+                    <filter name="have_additional" domain="[('additional','>=', 0)]" string="Additionals"/>
+                    <filter name="t_insurance_true" domain="[('t_insurance','=',True)]" string="Insured"/>
+                    <filter name="message_unread_true" domain="[('message_unread','=',True)]" string="Message Unread"/>
+                    <filter icon="terp-document-new" string="Drafts" name="draft" domain="[('state', 'in', ('draft','papproved'))]"/>
+                    <filter string="Approved" name="approved" domain="[('state', '=', 'approved')]"/>
+                    <group expand="1" string="Group By...">
+                        <filter name="groupby_insurer" context="{'group_by': 'insurer_id'}" string="Insurance Company"/>
+                        <filter name="groupby_author" context="{'group_by': 'author'}" string="Author"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    <!-- Calendario -->
+        <record id="view_workshop_calendar" model="ir.ui.view">
+            <field name="name">workshop.service.calendar</field>
+            <field name="model">workshop.service</field>
+            <field name="arch" type="xml">
+                <calendar string="Service Incoming" color="insurer_id" date_start="date_approved">
+                    <field name="partner_id"/>
+                    <field name="insurer_id"/>
+                </calendar>
+            </field>
+        </record>
+
+    <!-- Kanban -->
+        <record model="ir.ui.view" id="view_services_kanban">
+            <field name="name">workshop.service.kanban</field>
+            <field name="model">workshop.service</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="insurer_id" version="7.0" quick_create="false">
+                    <field name="n_incident"/>
+                    <field name="partner_id"/>
+                    <field name="insurer_id"/>
+                    <field name="color"/>
+                    <field name="priority"/>
+                    <field name="kanban_state"/>
+                    <field name="w_state"/>
+                    <field name="message_summary"/>
+                    <field name="message_unread"/>
+                    <field name="additional_count"/>
+                    <field name="vehicle_ids_color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_global_click oe_kanban_card ">
+                                <!-- <t t-if="record.alarm.raw_value"><div t-attf-class="oe_kanban_card_fancy"/></t> -->
+                                <div class="oe_dropdown_toggle oe_dropdown_kanban">
+                                    <span class="oe_e">i</span>
+                                    <ul class="oe_dropdown_menu">
+                                        <t t-if="widget.view.is_action_enabled('edit')"><li><a type="edit">Edit...</a></li></t>
+                                        <t t-if="widget.view.is_action_enabled('delete')"><li><a type="delete">Delete</a></li></t>
+                                        <li><a name="%(mail.action_email_compose_message_wizard)d" type="action">Send Email</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_kanban_content">
+                                    <div>
+                                        <b><field name="partner_id"/></b><br/>
+                                        <t t-if="record.partner_id_mobile.raw_value"><u><field name="partner_id_mobile"/></u><br/></t>
+                                        <t t-if="record.partner_id_phone.raw_value"><u><field name="partner_id_phone"/></u><br/></t>
+                                        <t t-if="record.n_incident.raw_value"><b><field name="n_incident"/></b><br/></t>
+                                        <field name="vehicle_ids" widget="many2many"/>
+                                        <field name="vehicle_ids_color" widget="many2many" />
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_bottom_left">
+                                    <a name="%(workshop.act_workshop_service_2_workshop_service_additional)d" type="action" t-if="record.additional_count.value > 0">
+                                        <ul>
+                                            <li>
+                                                <t t-esc="record.additional_count.value"/> Additionals<br/>
+                                            </li>
+                                        </ul>
+                                    </a>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <!-- <a t-if="record.kanban_state.raw_value === 'normal'" type="object" string="In Progress" name="set_kanban_state_done" class="oe_kanban_status"> </a>
+                                    <a t-if="record.kanban_state.raw_value === 'done'" type="object" string="Ready for next stage" name="set_kanban_state_blocked" class="oe_kanban_status oe_kanban_status_green"> </a>
+                                    <a t-if="record.kanban_state.raw_value === 'blocked'" type="object" string="Blocked" name="set_kanban_state_normal" class="oe_kanban_status oe_kanban_status_red"> </a> -->
+                                    <a t-if="record.w_state.raw_value === 'state2'" type="object" string="Autoparts Orders" name="set_w_state_state3" class="oe_kanban_status oe_kanban_status_purple"></a>
+                                    <a t-if="record.priority.raw_value > 0" type="object" string="Normal" name="set_high_priority" class="oe_e oe_star_off">7</a>
+                                    <a t-if="record.priority.raw_value == 0" type="object" string="Very Important" name="set_normal_priority" class="oe_e oe_star_on">7</a>
+                                    <img t-att-src="kanban_image('workshop.service','image', record.id.value)" class-att-title="record.insurer_id.value" width="32" height="24" class="oe_kanban_avatar" t-if="record.insurer_id.value"/>
+                                <div class="oe_kanban_footer_left">
+                                    <t t-raw="record.message_summary.raw_value"/>
+                                </div>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <!-- ACT -->
+
+        <record model="ir.actions.act_window" id="workshop_services_act">
+            <field name="name">Services</field>
+            <field name="res_model">workshop.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="search_view_id" ref="workshop_service_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', 'not in', ('pending','cancelled','done'))]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create new services.
+                </p>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='workshop_services_pending_act'>
+            <field name="name">Pending Services</field>
+            <field name="res_model">workshop.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="search_view_id" ref="workshop_service_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '=', 'pending')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create new services.
+                </p>
+            </field>
+        </record>
+
+        <record model='ir.actions.act_window' id='workshop_services_registry_act'>
+            <field name="name">Services Log</field>
+            <field name="res_model">workshop.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="workshop_service_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create new services.
+                </p>
+            </field>
+        </record>
+
+
+    <!-- Menus -->
+    <!-- Menu Raiz -->
+        <menuitem name="Services Registry" parent="menu_root" id="workshop_services_menu_root" groups="group_workshop_user" sequence="10"/>
+            <!-- Menu Servicios -->
+                <menuitem action="workshop_services_act" parent="workshop_services_menu_root" id="workshop_service_menu" groups="group_workshop_user" sequence="10"/>
+            <!-- Menu Pendientes -->
+            <menuitem action="workshop_services_pending_act" parent="workshop_services_menu_root" id="workshop_service_pending_menu" sequence="20" groups="workshop.group_workshop_super_manager"/>
+            <!-- Menu Registro -->
+                <menuitem action="workshop_services_registry_act" parent="workshop_services_menu_root" id="workshop_service_registry_menu" groups="group_workshop_user" sequence="30"/>
+    </data>
+</openerp>

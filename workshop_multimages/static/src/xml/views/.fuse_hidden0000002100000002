@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="workshop_service_multi_imageform_view" model="ir.ui.view">
+            <field name="name">Service Multi Images Form Inherited</field>
+            <field name="model">workshop.service</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="workshop.workshop_service_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook[1]" position="after">
+                    <notebook>
+                        <page string="To Budgeting">
+                            <group string="Images">
+
+                                <field name="multi_images" widget="image_multi" nolabel="1"/>
+                             </group>
+                        </page>
+                        <page string="Received Vehicle">
+                            <group string="Images" >
+                                <field name="multi_images_received" widget="image_multi" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Delivered Vehicle">
+                            <group string="Images">
+                                <field name="multi_images_delivered" widget="image_multi" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Related Documents" position="bottom">
+                            <group string="Attachments">
+                                <!-- <field name="attach_ids" nolabel="1" widget="many2many_binary"/> -->
+                                <field name="attach_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

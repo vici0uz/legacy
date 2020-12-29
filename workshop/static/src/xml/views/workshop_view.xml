@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!-- Modelo del Vehiculo -->
+    <!-- Form -->
+        <record model="ir.ui.view" id="workshop_vehicle_model_form">
+            <field name="name">workshop.vehicle.model.form</field>
+            <field name="model">workshop.vehicle.model</field>
+            <field name="arch" type="xml">
+                <form string="Model" version="7.0">
+                    <header>
+                        <button name="create_model_tree" type="object" string="Create Model Tree"/>
+                    </header>
+                    <sheet>
+                        <field name="image_medium" widget='image' class="oe_left oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="modelname" class="oe_edit_only"/>
+                            <h1>
+                                <field name="modelname" required="True"/>
+                            </h1>
+                            <label for="brand_id" class="oe_edit_only"/>
+                            <h2>
+                                <field name="brand_id" on_change="on_change_brand(brand_id)" required="True"/>
+                            </h2>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- Tree -->
+        <record model='ir.ui.view' id='workshop_vehicle_model_tree'>
+            <field name="name">workshop.vehicle.model.tree</field>
+            <field name="model">workshop.vehicle.model</field>
+            <field name="arch" type="xml">
+                <tree string="Models" version="7.0">
+                    <field name="brand_id"/>
+                    <field name="modelname"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Search -->
+        <record model='ir.ui.view' id='workshop_vehicle_model_search'>
+            <field name="name">workshop.vehicle.model.search</field>
+            <field name="model">workshop.vehicle.model</field>
+            <field name="arch" type="xml">
+                <search string="Vehicles" >
+                    <field name="brand_id" />
+                    <group expand="1" string="Group By...">
+                        <filter name="groupby_brand" context="{'group_by' : 'brand_id'}" string="Brand"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    <!-- ACT -->
+        <record model='ir.actions.act_window' id='workshop_vehicle_model_act'>
+            <field name="name">Vehicle Model</field>
+            <field name="res_model">workshop.vehicle.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_groupby_brand": True,}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new model.
+                </p><p>
+                    You can define several models (e.g. A3, A4) for each brand (Audi).
+                </p>
+            </field>
+        </record>
+
+<!-- Marca del Vehiculo -->
+    <!-- Tree -->
+        <record model='ir.ui.view' id='workshop_vehicle_model_brand_tree'>
+            <field name="name">workshop.vehicle.model.brand.tree</field>
+            <field name="model">workshop.vehicle.model.brand</field>
+            <field name="arch" type="xml">
+                <tree string="Model Brand" version="7.0">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Form -->
+        <record model='ir.ui.view' id='workshop_vehicle_model_brand_form'>
+            <field name="name">workshop.vehicle.model.brand.form</field>
+            <field name="model">workshop.vehicle.model.brand</field>
+            <field name="arch" type="xml">
+                <form string="Model Brand" version="7.0">
+                    <sheet>
+                        <header>
+                            <button name="create_brand_tree" string="Create Brand Category" type="object"/>
+                            <button name="create_all_category_brands" string="Create all categorys" type="object"/>
+                        </header>
+                        <group>
+                            <div>
+                                <field name="image_medium" widget="image" class="oe_left oe_avatar"/>
+                                <label for="name" class="oe_edit_only"/>
+                                <h1>
+                                    <field name="name" class="oe_inline" required="True"/>
+                                </h1>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- Kanban -->
+        <record model='ir.ui.view' id='workshop_vehicle_model_brand_kanban'>
+            <field name="name">workshop.vehicle.model.brand.kanban</field>
+            <field name="model">workshop.vehicle.model.brand</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="image"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open" href="#" class="oe_kanban_action oe_kanban_action_a">
+                                    <img t-att-src="kanban_image('workshop.vehicle.model.brand','image_small', record.id.value)" class="oe_employee_pictures"/>
+                                </a>
+                                <div style="text-align">
+                                    <h4 class="oe_partner_heading">
+                                        <a type="open">
+                                            <field name="name"/><br/>
+                                        </a>
+                                    </h4>
+                                    <t>
+                                    </t>
+                                </div>
+                            </div>
+                            <script>
+                            $('.oe_pic').load(function() { if($(this).width() > $(this).height()){ $(this).addClass('oe_employee_picture_wide') } } );
+                            </script>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    <!-- ACT -->
+        <record model='ir.actions.act_window' id='workshop_vehicle_model_brand_act'>
+            <field name="name">Vehicle Brands</field>
+            <field name="res_model">workshop.vehicle.model.brand</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new brand.
+                </p>
+            </field>
+        </record>
+
+<!-- Tipo de Vehiculo -->
+    <!-- Tree -->
+        <record model='ir.ui.view' id="workshop_vehicle_type_tree">
+            <field name="name">workshop.vehicle.type.tree</field>
+            <field name="model">workshop.vehicle.type</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle Type" version="7.0" editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    <!-- ACT -->
+        <record model='ir.actions.act_window' id='workshop_vehicle_type_act'>
+            <field name="name">Vehicle Type</field>
+            <field name="res_model">workshop.vehicle.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new vehicle type.
+                </p><p>
+                    You can customize available type for the vehicles. Example:
+                    Sedan, Pick-up, SUV, etc.
+                </p>
+            </field>
+        </record>
+
+<!-- Color del Vehiculo -->
+    <!-- Tree -->
+        <record model="ir.ui.view" id="workshop_vehicle_color_tree">
+            <field name="name">workshop.vehicle.color.tree</field>
+            <field name="model">workshop.vehicle.color</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle Colors" editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="workshop_vehicle_color_form">
+            <field name="name">workshop.vehicle.color.form</field>
+            <field name="model">workshop.vehicle.color</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Colors" version="7.0">
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    <!-- Act -->
+        <record model="ir.actions.act_window" id="workshop_vehicle_color_act">
+            <field name="name">Vehicle Colors</field>
+            <field name="res_model">workshop.vehicle.color</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add colors.
+                </p>
+            </field>
+        </record>
+
+<!-- Vehiculo -->
+    <!-- Tree -->
+        <record model='ir.ui.view' id='workshop_vehicle_tree'>
+            <field name="name">workshop.vehicle.tree</field>
+            <field name="model">workshop.vehicle</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicles" version="7.0">
+                    <field name="model_id"/>
+                    <field name="partner_id"/>
+                    <field name="vin_sn"/>
+                    <field name="license_plate"/>
+                    <field name="year"/>
+                    <field name="type"/>
+                    <field name="state"/>
+                    <field name="color"/>
+                </tree>
+            </field>
+        </record>
+    <!-- Search -->
+        <record model='ir.ui.view' id="workshop_vehicle_search">
+            <field name="name">workshop.vehicle.search</field>
+            <field name="model">workshop.vehicle</field>
+            <field name="arch" type="xml">
+                <search string="All vehicles">
+                    <field name="name" filter_domain="[('name','ilike',self)]" string="Vehicle"/>
+                    <field name="tag_ids"/>
+                    <field name="vin_sn"/>
+                    <field name="partner_id"/>
+                    <field name="license_plate"/>
+                    <filter icon="terp-document-new" string="In Workshop" name="vehicle_in_workshop" domain="[('state', '=','vehicle_out']"/>
+                </search>
+            </field>
+        </record>
+    <!-- Form -->
+        <record model='ir.ui.view' id='workshop_vehicle_form'>
+            <field name="name">workshop.vehicle.form</field>
+            <field name="model">workshop.vehicle</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle" version="7.0">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_colors='{"vehicle_in":"green"}'/>
+                    </header>
+                    <sheet>
+                        <div class="oe_inline oe_right oe_edit_only">
+                            <field name="reg_type"/>
+                            <label for="reg_type" string="It's a Autopart?"/>
+                        </div>
+                        <field name="image_medium" widget="image" class="oe_left oe_avatar"/>
+                        <div class="oe_title">
+
+                            <label for="model_id" class="oe_edit_only"/>
+                            <h1>
+                                <field name="model_id" default_focus="1" class="oe_inline" on_change="on_change_model(model_id)" required="True" options="{'no_quick_create':True}"/>
+                            </h1>
+                            <label for="vin_sn" class="oe_edit_only" attrs="{'invisible':[('reg_type','=', True)]}"/>
+                            <h2>
+                                <field name="vin_sn" class="oe_inline" on_change="capitalizar(vin_sn)" attrs="{'required':[('reg_type','=', False)], 'invisible':[('reg_type','=',True)]}"/>
+                            </h2>
+                            <field name="tag_ids" widget="many2many_tags"  style="width: 40%%" placeholder="Tags"/>
+                        </div>
+                        <div class="oe_right oe_button_box">
+                            <button name="return_action_to_open" type="object" context="{'xml_id':'workshop_services_act'}" string="Services" help="Show the services for this vehicle"/>
+                            <button name="vehicle_outgoing" type="object" string="Delivering Vehicle" icon="STOCK_EXECUTE" states="vehicle_in"/>
+                        </div>
+                        <group col="2" string="General Properties">
+                            <group>
+                                <!-- <field name="brand_id_rel"/> -->
+                                <field name="partner_id" style="width: 40%%" class="oe_inline" options="{'no_quick_create':True}"/>
+                                <field name="license_plate" class="oe_inline" style="width: 15%%" on_change="upper_case(license_plate)" placeholder="License Plate" attrs="{'invisible':[('reg_type','=', True)]}"/>
+                            </group>
+                            <group>
+                                <field name="date_rec"/>
+                                <field name="date_in"/>
+                                <field name="year"  style="width: 40%%" attrs="{'invisible':[('reg_type','=', True)], 'required':[('reg_type','=', False)]}" />
+                                <field name="type" style="width: 60%% " attrs="{'invisible':[('reg_type','=', True)]}"/>
+                                <field name="autopart_type" style="width: 70%%" attrs="{'invisible':[('reg_type','=', False)], 'required':[('reg_type','=', True)]}"/>
+                            </group>
+                        </group>
+                        <group col="2">
+                            <group string="Additional Properties">
+                                <field name="doors" attrs="{'invisible':[('reg_type','=', True)]}"/>
+                                <field name="color" style="width: 50%%" required="1"/>
+                                <field name="seats" attrs="{'invisible':[('reg_type','=', True)]}"/>
+                            </group>
+                            <group string="Engine Options" >
+                                <field name="transmission" style="width: 50%%"  attrs="{'invisible':[('reg_type','=', True)]}"/>
+                                <field name="fuel_type" style="width: 50%%"  attrs="{'invisible':[('reg_type','=', True)]}"/>
+                            </group>
+                        </group>
+                        <group string="Services Log">
+                            <field name="service_ids" nolabel="1" readonly="True">
+                                <tree>
+                                    <field name="job_no"/>
+                                    <field name="date_rec"/>
+                                    <field name="insurer_id"/>
+                                    <field name="n_incident"/>
+                                    <field name="expected_date"/>
+                                    <field name="progress_rate" widget="progressbar"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <notebook>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                            <field name="message_ids" widget="mail_thread" options='{"thread_level": 1}'/>
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                    </div>
+               </form>
+            </field>
+        </record>
+    <!-- Kanban -->
+        <record model='ir.ui.view' id='workshop_vehicle_kanban'>
+            <field name="name">workshop.vehicle.kanban</field>
+            <field name="model">workshop.vehicle</field>
+            <field name="arch" type="xml">
+                <kanban quick_create="false" version="7.0" class="oe_background_grey">
+                    <field name="license_plate"/>
+                    <field name="model_id"/>
+                    <field name="tag_ids"/>
+                    <field name="image"/>
+                    <field name="vin_sn"/>
+                    <field name="partner_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open" href="#" class="oe_kanban_action oe_kanban_action_a">
+                                    <img t-att-src="kanban_image('workshop.vehicle', 'image_small', record.id.value)"/>
+                                </a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading">
+                                        <a type="open">
+                                            <field name="vin_sn"/><br/>
+                                            <field name="model_id"/><br/>
+                                        </a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            <field name="partner_id"/>
+                                        </li>
+                                        <li>
+                                            <field name="year"/>
+                                        </li>
+                                        <li>
+                                            <t t-if="record.license_plate.raw_value"><field name="license_plate"/></t>
+                                        </li>
+                                    </ul>
+                                    <field name="tag_ids"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+    <!-- Calendar -->
+        <record model="ir.ui.view" id="workshop_vehicle_calendar">
+            <field name="name">workshop.vehicle.calendar</field>
+            <field name="model">workshop.vehicle</field>
+            <field name="arch" type="xml">
+                <calendar string="Vehicle in the Workshop" color="state" date_start="date_in">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </calendar>
+            </field>
+        </record>
+    <!-- Vista de Vehiculos por defecto -->
+        <record model='ir.actions.act_window' id='workshop_vehicle_act'>
+            <field name="name">Vehicles in the Workshop</field>
+            <field name="res_model">workshop.vehicle</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="search_view_id" ref="workshop_vehicle_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '=', 'vehicle_in'),('reg_type', '=', False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a new vehicle.
+                </p><p>
+                    You will be able to manage your customers vehicles, track of the
+                    services, auto-parts, contact's and vendors asociated to each
+                    vehicle.
+                </p>
+            </field>
+        </record>
+    <!-- Historico de vehiculos -->
+        <record model="ir.actions.act_window" id="workshop_vehicle_registry_act">
+            <field name="name">Vehicle Registry</field>
+            <field name="res_model">workshop.vehicle</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+            <field name="search_view_id" ref="workshop_vehicle_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', '=', 'vehicle_out'), ('reg_type', '=', False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Registry
+                </p>
+            </field>
+        </record>
+
+<!-- Vista de compañias de seguros -->
+    <record model="ir.actions.act_window" id="workshop_insurers_act">
+        <field name="name">Insurer Company's</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'default_insurer': True, 'default_supplier': True}</field>
+        <field name="domain">[('insurer', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add Insurer Company
+            </p>
+        </field>
+    </record>
+
+
+<!-- Menus -->
+    <!-- Menu Raiz -->
+    <menuitem name="Workshop" id="menu_root" sequence="110" groups="group_workshop_user"/>
+        <!-- Vehiculos -->
+            <!-- Menu Padre -->
+            <menuitem name="Vehicles" parent="menu_root" id="workshop_vehicles" sequence="20" groups="group_workshop_user"/>
+                <!-- Vehiculos -->
+                    <menuitem action="workshop_vehicle_act" id="workshop_vehicle_menu" parent="workshop_vehicles" groups="group_workshop_user"/>
+                <!-- Historial de Vehiculos -->
+                    <menuitem action="workshop_vehicle_registry_act" id="workshop_vehicle_registry_menu" parent="workshop_vehicles" groups="group_workshop_user"/>
+        <!-- Configuracion -->
+            <!-- Menu Padre -->
+                <menuitem name="Configuration" parent="menu_root" id="workshop_configuration" sequence="50" groups="group_workshop_manager"/>
+                    <!-- Modelos -->
+                        <menuitem action="workshop_vehicle_model_act" parent="workshop_configuration" id="workshop_vehicle_model_menu" groups="group_workshop_user"/>
+                    <!-- Marcas -->
+                        <menuitem action="workshop_vehicle_model_brand_act" parent="workshop_configuration" id="workshop_vehicle_model_brand_menu" groups="group_workshop_user"/>
+                    <!-- Tipos -->
+                        <menuitem action="workshop_vehicle_type_act" parent="workshop_configuration" id="workshop_vehicle_type_menu" groups="group_workshop_user"/>
+                    <!-- Colores -->
+                        <menuitem action="workshop_vehicle_color_act" parent="workshop_configuration" id="workshop_vehicle_color_menu"/>
+        <!-- Atajo en Sales -->
+    <menuitem action="workshop_vehicle_act" id="workshop_vehicles_sales" parent="base.menu_sales" groups="group_workshop_user" sequence="2"/>
+    <menuitem action="workshop_insurers_act" id="workshop_insurers_menu" parent="base.menu_sales" groups="group_workshop_user" sequence="1"/>
+
+    </data>
+</openerp>
+
+
+
+
+
+

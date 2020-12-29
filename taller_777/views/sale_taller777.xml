@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="sale_order_line_taller_777_inh" model="ir.ui.view">
+            <field name="name">sale.order.line.form2.inherit.taller777</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/form//field[@name='discount']" position="replace">
+                    <group string="Discounts">
+                        <field name="discount"/>
+                        <field name="discount_amount"/>
+                        <field name="amount_final" />
+                        <button name="generate_discount" string="Calcule" class="oe_edit_only" attrs="{'invisible':[('discount_amount','=','0')]}" type="object"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

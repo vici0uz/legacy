@@ -1,0 +1,397 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* workshop_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-39748ab\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-24 06:12+0000\n"
+"PO-Revision-Date: 2015-08-24 02:15-0400\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#. module: workshop_project
+#: model:ir.actions.act_window,help:workshop_project.act_workshop_service_2_project_project
+msgid ""
+"<p class=\"oe_view_nocontent_create\">\n"
+"                    Click to add Services to this Partner.\n"
+"                </p>\n"
+"            "
+msgstr ""
+"<p class=\"oe_view_nocontent_create\">                    Click para agregar "
+"Servicios a este Cliente.                </p>            "
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Amounts"
+msgstr "Montos"
+
+#. module: workshop_project
+#: field:workshop.service.case,approved_amount:0
+msgid "Approved Amount"
+msgstr "Monto aprobado"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Approved Amounts"
+msgstr "Montos Aprobados"
+
+#. module: workshop_project
+#: selection:workshop.service.supply,cost_type:0
+msgid "Autopart"
+msgstr "Autoparte"
+
+#. module: workshop_project
+#: field:workshop.service.supply,autopart_id:0
+msgid "Autopart id"
+msgstr "Autopart id"
+
+#. module: workshop_project
+#: selection:workshop.service.case,motive:0
+msgid "Both"
+msgstr "Ambos"
+
+#. module: workshop_project
+#: field:project.project,workshop_service_id:0
+#: field:workshop.service.labor,service_id:0
+msgid "Case"
+msgstr "Caso"
+
+#. module: workshop_project
+#: field:workshop.service,case_ids:0
+msgid "Case ids"
+msgstr "Case ids"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:25
+#, python-format
+msgid "Click to add Services to this Partner."
+msgstr "Click to add Services to this Partner."
+
+#. module: workshop_project
+#: field:workshop.service.case,motive:0
+msgid "Cost Motif"
+msgstr "Motivo"
+
+#. module: workshop_project
+#: field:workshop.service.supply,cost_price:0
+msgid "Cost Price"
+msgstr "Precio de Costo"
+
+#. module: workshop_project
+#: field:workshop.service.case,create_uid:0
+#: field:workshop.service.labor,create_uid:0
+#: field:workshop.service.supply,create_uid:0
+#: field:workshop.service.supply_line,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: workshop_project
+#: field:workshop.service.case,create_date:0
+#: field:workshop.service.labor,create_date:0
+#: field:workshop.service.supply,create_date:0
+#: field:workshop.service.supply_line,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: workshop_project
+#: selection:workshop.service.case,motive:0
+msgid "Discount"
+msgstr "Descuento"
+
+#. module: workshop_project
+#: field:workshop.service.labor,employee_id:0
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: workshop_project
+#: selection:workshop.service.case,motive:0
+msgid "Franchise"
+msgstr "Franquicia"
+
+#. module: workshop_project
+#: field:workshop.service,service_supply_gain:0
+msgid "Gain"
+msgstr "Ganancia"
+
+#. module: workshop_project
+#: field:workshop.service.case,id:0 field:workshop.service.labor,id:0
+#: field:workshop.service.supply,id:0 field:workshop.service.supply_line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: workshop_project
+#: field:workshop.service.case,case_n_incident:0
+msgid "Incident Number"
+msgstr "Numero de Siniestro"
+
+#. module: workshop_project
+#: field:workshop.service.supply_line,invoiced_amount:0
+msgid "Invoiced"
+msgstr "Facturado"
+
+#. module: workshop_project
+#: field:workshop.service,service_invoiced_amount:0
+#: field:workshop.service.supply,invoiced_amount:0
+msgid "Invoiced Amount"
+msgstr "Monto Facturado"
+
+#. module: workshop_project
+#: field:workshop.service.labor,labor_type:0
+msgid "Labor Condition"
+msgstr "Condición del Trabajor"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+#: field:workshop.service,labor_line:0
+#: field:workshop.service,service_labor_cost:0
+#: selection:workshop.service.case,motive:0
+#: field:workshop.service.labor,labor_cost:0
+msgid "Labor Cost"
+msgstr "Costo Mano Obra"
+
+#. module: workshop_project
+#: field:workshop.service.case,write_uid:0
+#: field:workshop.service.labor,write_uid:0
+#: field:workshop.service.supply,write_uid:0
+#: field:workshop.service.supply_line,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: workshop_project
+#: field:workshop.service.case,write_date:0
+#: field:workshop.service.labor,write_date:0
+#: field:workshop.service.supply,write_date:0
+#: field:workshop.service.supply_line,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: workshop_project
+#: field:workshop.service.labor,notes:0
+msgid "Observations"
+msgstr "Observaciones"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Operational Cost"
+msgstr "Costo Operativo"
+
+#. module: workshop_project
+#: field:workshop.service,supply_line:0
+msgid "Operational Costs"
+msgstr "Costos Operativos"
+
+#. module: workshop_project
+#: field:res.partner,outsourced:0
+#: selection:workshop.service.labor,labor_type:0
+msgid "Outsourced"
+msgstr "Tercerizado"
+
+#. module: workshop_project
+#: model:ir.model,name:workshop_project.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: workshop_project
+#: field:workshop.service.labor,partner_id:0
+msgid "Partner id"
+msgstr "Socio"
+
+#. module: workshop_project
+#: field:workshop.service.supply_line,cost_price:0
+msgid "Price"
+msgstr "Precio"
+
+#. module: workshop_project
+#: field:workshop.service.supply_line,product_id:0
+msgid "Product"
+msgstr "Producto"
+
+#. module: workshop_project
+#: field:workshop.service.supply,product_id:0
+msgid "Product id"
+msgstr "Producto"
+
+#. module: workshop_project
+#: field:workshop.service,project_id_progress:0
+msgid "Progress"
+msgstr "Progreso"
+
+#. module: workshop_project
+#: model:ir.model,name:workshop_project.model_project_project
+msgid "Project"
+msgstr "Proyecto"
+
+#. module: workshop_project
+#: field:workshop.service,project_id:0
+msgid "Project id"
+msgstr "Project id"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Prueba"
+msgstr "Prueba"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Prueba2"
+msgstr "Prueba2"
+
+#. module: workshop_project
+#: field:workshop.service.supply_line,qty:0
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: workshop_project
+#: selection:workshop.service.labor,labor_type:0
+msgid "Regular"
+msgstr "Regular"
+
+#. module: workshop_project
+#: field:workshop.service.case,case_t_insurance:0
+msgid "Repair by Insurance"
+msgstr "Vía Seguro?"
+
+#. module: workshop_project
+#: selection:workshop.service.case,motive:0
+msgid "Replacemente"
+msgstr "Repuesto"
+
+#. module: workshop_project
+#: field:workshop.service.case,service_id:0
+#: field:workshop.service.supply,service_id:0
+#: field:workshop.service.supply_line,service_id:0
+msgid "Service id"
+msgstr "Service id"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Supplies"
+msgstr "Insumos"
+
+#. module: workshop_project
+#: field:workshop.service,service_supply_cost:0
+msgid "Supplies Cost"
+msgstr "Costo de Materiales"
+
+#. module: workshop_project
+#: selection:workshop.service.supply,cost_type:0
+msgid "Supply"
+msgstr "Insumo"
+
+#. module: workshop_project
+#: field:workshop.service,supply_line_2:0
+msgid "Supply line 2"
+msgstr "Supply line 2"
+
+#. module: workshop_project
+#: field:workshop.service,case_total:0
+msgid "Total Amount"
+msgstr "Monto Total"
+
+#. module: workshop_project
+#: field:workshop.service,service_gain_total:0
+msgid "Total Gain"
+msgstr "Ganancia Total"
+
+#. module: workshop_project
+#: field:workshop.service.supply,cost_type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: workshop_project
+#: model:ir.model,name:workshop_project.model_workshop_service
+msgid "Vehicle Services"
+msgstr "Servicios"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:19
+#: model:ir.actions.act_window,name:workshop_project.act_workshop_service_2_project_project
+#, python-format
+msgid "Work"
+msgstr "Trabajo"
+
+#. module: workshop_project
+#: view:workshop.service:workshop_project.workshop_service_form_project_inh
+msgid "Workshop"
+msgstr "Taller"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:21
+#, python-format
+msgid "form"
+msgstr "form"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:22
+#, python-format
+msgid "kanban,tree,form"
+msgstr "kanban,tree,form"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:8
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:20
+#, python-format
+msgid "project.project"
+msgstr "project.project"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:7
+#, python-format
+msgid "project.project.form.inh"
+msgstr "project.project.form.inh"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:116
+#, python-format
+msgid "res.partner"
+msgstr "res.partner"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:115
+#, python-format
+msgid "res.partner.form.workshop.project.inh"
+msgstr "res.partner.form.workshop.project.inh"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_op_cost.xml:7
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:33
+#, python-format
+msgid "workshop.service"
+msgstr "workshop.service"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:32
+#, python-format
+msgid "workshop.service.form.project.inh"
+msgstr "workshop.service.form.project.inh"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_op_cost.xml:6
+#, python-format
+msgid "workshop.service.op.cost.inh"
+msgstr "workshop.service.op.cost.inh"
+
+#. module: workshop_project
+#. openerp-web
+#: code:addons/workshop_project/static/src/xml/views/workshop_project.xml:23
+#, python-format
+msgid "{'search_default_workshop_service_id': active_id}"
+msgstr "{'search_default_workshop_service_id': active_id}"

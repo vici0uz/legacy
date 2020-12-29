@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="invoice_supplier_form_inh">
+            <field name="name">account.invoice_supplier_form.inh</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='supplier_invoice_number']" position="replace">
+                    <field name="supplier_invoice_number" required="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="invoice_supplier_form_inh2">
+                <field name="name">account.invoice_supplier_form.inh2</field>
+                <field name="model">account.invoice</field>
+                <field name="inherit_id" ref="account.invoice_supplier_form"/>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='date_invoice']" position="replace">
+                        <field name="date_invoice" required="1"/>
+                    </xpath>
+                </field>
+        </record>
+    <!-- Modificacion Factura Proveedor -->
+    <!-- Modificacion vista Tree -->
+        <record id="account_invoice_supplier_tree_inh" model="ir.ui.view">
+            <field name="name">account.invoice.inh</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_invoice']" position="after">
+                    <field name="supplier_invoice_number"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_invoice_supplier_tree_inh1" model="ir.ui.view">
+            <field name="name">account.invoice.inh1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="invoice_condition"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_invoice_supplier_tree_inh2" model="ir.ui.view">
+            <field name="name">account.invoice.inh2</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='number']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_invoice_supplier_tree_inh3" model="ir.ui.view">
+            <field name="name">account.invoice.inh3</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    <!-- Modificacion Formulario -->
+        <record id="account_invoice_suplier_form_inh" model="ir.ui.view">
+            <field name="name">account.invoice.form.inh</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_invoice']" position="after">
+                    <field name="invoice_condition" required="1" on_change="_onchange_invoice_condition(invoice_condition)"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_invoice_supplier_form_inh1" model="ir.ui.view">
+            <field name="name">account.invoice.inh1</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="account_invoice_suplier_form_inh2" model="ir.ui.view">
+            <field name="name">account.invoice.form.inh2</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                    <field string="Supplier" name="partner_id"
+                              on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, partner_bank_id, company_id, context)"
+                              context="{'default_customer': 0, 'default_is_company': 1, 'search_default_supplier': 1, 'default_supplier': 1}"
+                              domain="[('supplier', '=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+
+    <!-- PRUEBA -->
+        <record id="account_invoice_suplier_form_inh3" model="ir.ui.view">
+            <field name="name">account.invoice.form.inh3</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="print_iva_10" type="object" string="Prueba"/>
+                </xpath>
+            </field>
+        </record>
+
+    <!-- Modificacion Vista Graph -->
+        <record model="ir.ui.view" id="account_invoice_graph_l10n_py_alan_amount_tax">
+            <field name="name">account.invoice.graph.l10npyalan.amount_tax</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_invoice_graph"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="amount_tax" operator="+"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_invoice_graph_l10n_py_alan_tax_line">
+            <field name="name">account.invoice.graph.l10npyalan.tax_line</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_invoice_graph"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="iva_10_compra" operator="+"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openerp>
+    <data>
+
+        <template id="report_workshop_vehicle_customer_agreement_document">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="col-xs-12 text-center" >
+                        <h3>
+                            <span>Customer Compliance Letter</span>
+                        </h3>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="row mt32 mb32" id="text" style="font-size:16px">
+                        <div class="col-xs-1">
+                        </div>
+                        <div class="col-xs-10 ">
+                            <!-- <span t-field="res_company"/> -->
+                            <p><strong><t t-raw="res_company.name"/></strong> deliver the vehicle to <strong>Sr:</strong> <span t-field="o.partner_id"/></p>
+                            <p><strong>Marca: </strong> <span t-field="o.vehicle_ids.model_id.brand_id"/> <strong>Modelo: </strong> <span t-field="o.vehicle_ids.model_id.modelname"/><span t-if="o.vehicle_ids.license_plate" class="clearer" style="{float:left;}"> <strong>Matricula: </strong><span t-field="o.vehicle_ids.license_plate"/></span>  <strong>Year: </strong><span t-field="o.vehicle_ids.year"/> <strong>Color: </strong><span t-field="o.vehicle_ids.color"/></p>
+                            <p><strong>Chassis Number: </strong><span t-field="o.vehicle_ids.vin_sn"/></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-10">
+                            <p><strong>According the works carried out.</strong></p>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="col-xs-1 "></div>
+                        <div class="col-xs-10">
+                            <p><strong>Obs:</strong></p>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 " >
+                            <strong>------------------------------------</strong>
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 " >
+                            <strong>------------------------------------</strong>
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 " >
+                            <strong>------------------------------------</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 text-center" >
+                            <strong>Date</strong>
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 text-center">
+                            <strong>Signature</strong>
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 text-center">
+                            <strong>Clarification</strong>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_workshop_vehicle__customer_agreement">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="doc_id">
+                    <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'workshop.report_workshop_vehicle_customer_agreement_document')"/>
+                </t>
+            </t>
+        </template>
+
+<template id="report_workshop_vehicle_agreement_style" inherit_id="report.layout">
+  <xpath expr="//style" position="after">
+    <style type="text/css">
+
+        .devel {
+            background-color: red;
+            border: 1px solid black;
+        }
+        .devel-blue {
+            background-color: blue;
+            border: 1px solid pink;
+        }
+        .date {
+            position: absolute;
+            top: 350px;
+            left: 50px;
+        }
+        .signature {
+            position: absolute;
+            top: 350px;
+            left: 350px;
+        }
+        .clarification {
+            position: absolute;
+            top: 350px;
+            left:600px;
+        }
+        .clearer {
+            clear:both;
+            }
+
+    </style>
+  </xpath>
+</template>
+
+    </data>
+</openerp>

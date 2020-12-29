@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    <!-- Modificacion Factura Proveedor -->
+        <!-- Modificacion vista Form -->
+            <record model="ir.ui.view" id="invoice_supplier_form_inh">
+                <field name="name">account.invoice_supplier_form.inh</field>
+                <field name="model">account.invoice</field>
+                <field name="inherit_id" ref="account.invoice_supplier_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='supplier_invoice_number']" position="replace">
+                        <field name="supplier_invoice_number" required="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='date_invoice']" position="replace">
+                        <field name="date_invoice" required="1"/>
+                    </xpath>
+                    <xpath expr="//field[@name='fiscal_position']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='reference']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='reference_type']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                        <attribute name="required">0</attribute>
+                    </xpath>
+                    <xpath expr="//label[@for='reference_type']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='date_invoice']" position="after">
+                        <field name="invoice_condition" required="1" on_change="_onchange_invoice_condition(invoice_condition)" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                    </xpath>
+                    <xpath expr="//field[@name='payment_term']" position="attributes">
+                        <attribute name="required">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_id']" position="replace">
+                        <field string="Supplier" name="partner_id"
+                                  on_change="onchange_partner_id(type, partner_id, date_invoice, payment_term, partner_bank_id, company_id, context)"
+                                  context="{'default_customer': 0, 'default_is_company': 1, 'search_default_supplier': 1, 'default_supplier': 1}"
+                                  domain="[('supplier', '=', True)]" options="{'no_quick_create':True}"/>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/group/div" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </field>
+            </record>
+
+
+
+        <!-- Modificacion vista Tree -->
+            <record id="account_invoice_supplier_tree_inh" model="ir.ui.view">
+                <field name="name">account.invoice.inh</field>
+                <field name="model">account.invoice</field>
+                <field name="inherit_id" ref="account.invoice_tree"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='date_invoice']" position="after">
+                        <field name="supplier_invoice_number"/>
+                    </xpath>
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name="invoice_condition"/>
+                    </xpath>
+                    <xpath expr="//field[@name='number']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='origin']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                </field>
+            </record>
+
+    <!-- PRUEBA -->
+        <!-- <record id="account_invoice_suplier_form_inh3" model="ir.ui.view">
+            <field name="name">account.invoice.form.inh3</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="mierda" type="object" string="Prueba exentas"/>
+                </xpath>
+            </field>
+        </record> -->
+        <record model="ir.ui.view" id="view_invoice_graph">
+            <field name="name">account.invoice.graph</field>
+            <field name="model">account.invoice</field>
+            <field name="arch" type="xml">
+                <graph string="Invoices" type="pivot">
+                    <!-- <field name="partner_id"/> -->
+                    <field name="date_invoice" interval="day" type="row"/>
+                    <field name="partner_id" type="row"/>
+                    <field name="supplier_invoice_number"/>
+                    <field name="exenta" operator="+"/>
+                    <field name="iva_5" operator="+"/>
+                    <field name="iva_10" operator="+"/>
+                    <field name="amount_untaxed" operator="+"/>
+                    <field name="amount_total" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+    <!-- Modificacion Vista Graph -->
+        <!-- <record model="ir.ui.view" id="account_invoice_graph_l10n_py_alan_amount_tax">
+            <field name="name">account.invoice.graph.l10npyalan.amount_tax</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_invoice_graph"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="amount_tax" operator="+"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="exenta" operator="+"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="iva_10_compra" operator="+"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="iva_5_compra" operator="+"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="date_invoice" interval="month" type="col"/>
+                </xpath>
+            </field>
+        </record> -->
+
+    </data>
+</openerp>

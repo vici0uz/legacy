@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+    <!-- Vehicle Tags -->
+        <record id="vehicle_tag_junior" model="workshop.vehicle.tag" >
+            <field name="name">Junior</field>
+        </record>
+
+        <record id="vehicle_tag_senior" model="workshop.vehicle.tag" >
+            <field name="name">Senior</field>
+        </record>
+
+        <record id="vehicle_tag_leasing" model="workshop.vehicle.tag" >
+            <field name="name">Employee Car</field>
+        </record>
+
+        <record id="vehicle_tag_purchased" model="workshop.vehicle.tag" >
+            <field name="name">Purchased</field>
+        </record>
+
+        <record id="vehicle_tag_compact" model="workshop.vehicle.tag" >
+            <field name="name">Compact</field>
+        </record>
+
+        <record id="vehicle_tag_sedan" model="workshop.vehicle.tag" >
+            <field name="name">Sedan</field>
+        </record>
+
+        <record id="vehicle_tag_convertible" model="workshop.vehicle.tag" >
+            <field name="name">Convertible</field>
+        </record>
+
+        <record id="vehicle_tag_break" model="workshop.vehicle.tag" >
+            <field name="name">Break</field>
+        </record>
+
+    <!-- Vehicle Models -->
+        <record id="model_corsa" model="workshop.vehicle.model">
+            <field name="modelname">Corsa</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_astra" model="workshop.vehicle.model">
+            <field name="modelname">Astra</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_agila" model="workshop.vehicle.model">
+            <field name="modelname">Agila</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_combotour" model="workshop.vehicle.model">
+            <field name="modelname">Combo Tour</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_meriva" model="workshop.vehicle.model">
+            <field name="modelname">Meriva</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_astragtc" model="workshop.vehicle.model">
+            <field name="modelname">AstraGTC</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_zafira" model="workshop.vehicle.model">
+            <field name="modelname">Zafira</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_zafiratourer" model="workshop.vehicle.model">
+            <field name="modelname">Zafira Tourer</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_insignia" model="workshop.vehicle.model">
+            <field name="modelname">Insignia</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_mokka" model="workshop.vehicle.model">
+            <field name="modelname">Mokka</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_antara" model="workshop.vehicle.model">
+            <field name="modelname">Antara</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_ampera" model="workshop.vehicle.model">
+            <field name="modelname">Ampera</field>
+            <field name="brand_id" ref="brand_opel" />
+        </record>
+
+        <record id="model_a1" model="workshop.vehicle.model">
+            <field name="modelname">A1</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a3" model="workshop.vehicle.model">
+            <field name="modelname">A3</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a4" model="workshop.vehicle.model">
+            <field name="modelname">A4</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a5" model="workshop.vehicle.model">
+            <field name="modelname">A5</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a6" model="workshop.vehicle.model">
+            <field name="modelname">A6</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a7" model="workshop.vehicle.model">
+            <field name="modelname">A7</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_a8" model="workshop.vehicle.model">
+            <field name="modelname">A8</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_q3" model="workshop.vehicle.model">
+            <field name="modelname">Q3</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_q5" model="workshop.vehicle.model">
+            <field name="modelname">Q5</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_q7" model="workshop.vehicle.model">
+            <field name="modelname">Q7</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_tt" model="workshop.vehicle.model">
+            <field name="modelname">TT</field>
+            <field name="brand_id" ref="brand_audi" />
+        </record>
+
+        <record id="model_serie1" model="workshop.vehicle.model">
+            <field name="modelname">Serie 1</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_serie3" model="workshop.vehicle.model">
+            <field name="modelname">Serie 3</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_serie5" model="workshop.vehicle.model">
+            <field name="modelname">Serie 5</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_serie6" model="workshop.vehicle.model">
+            <field name="modelname">Serie 6</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_serie7" model="workshop.vehicle.model">
+            <field name="modelname">Serie 7</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_seriex" model="workshop.vehicle.model">
+            <field name="modelname">Serie X</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_seriez4" model="workshop.vehicle.model">
+            <field name="modelname">Serie Z4</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_seriem" model="workshop.vehicle.model">
+            <field name="modelname">Serie M</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_seriehybrid" model="workshop.vehicle.model">
+            <field name="modelname">Serie Hybrid</field>
+            <field name="brand_id" ref="brand_bmw" />
+        </record>
+
+        <record id="model_classa" model="workshop.vehicle.model">
+            <field name="modelname">Class A</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classb" model="workshop.vehicle.model">
+            <field name="modelname">Class B</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classc" model="workshop.vehicle.model">
+            <field name="modelname">Class C</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classcl" model="workshop.vehicle.model">
+            <field name="modelname">Class CL</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classcls" model="workshop.vehicle.model">
+            <field name="modelname">Class CLS</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classe" model="workshop.vehicle.model">
+            <field name="modelname">Class E</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classm" model="workshop.vehicle.model">
+            <field name="modelname">Class M</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classgl" model="workshop.vehicle.model">
+            <field name="modelname">Class GL</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classglk" model="workshop.vehicle.model">
+            <field name="modelname">Class GLK</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classr" model="workshop.vehicle.model">
+            <field name="modelname">Class R</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classs" model="workshop.vehicle.model">
+            <field name="modelname">Class S</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classslk" model="workshop.vehicle.model">
+            <field name="modelname">Class SLK</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_classsls" model="workshop.vehicle.model">
+            <field name="modelname">SLS</field>
+            <field name="brand_id" ref="brand_mercedes" />
+        </record>
+
+        <record id="model_hilux" model="workshop.vehicle.model">
+            <field name="modelname">Hilux</field>
+            <field name="brand_id" ref="brand_toyota"/>
+        </record>
+
+        <record id="model_vitz" model="workshop.vehicle.model">
+            <field name="modelname">Vitz</field>
+            <field name="brand_id" ref="brand_toyota"/>
+        </record>
+        <record id="model_corolla" model="workshop.vehicle.model">
+            <field name="modelname">Celica</field>
+            <field name="brand_id" ref="brand_toyota"/>
+        </record>
+        <record id="model_sprinter" model="workshop.vehicle.model">
+            <field name="modelname">Sprinter</field>
+            <field name="brand_id" ref="brand_toyota"/>
+        </record>
+
+      <!-- Vehicle Years -->
+        <record id="year_1980" model="workshop.vehicle.year">
+            <field name="name">1980</field>
+        </record>
+        <record id="year_1981" model="workshop.vehicle.year">
+            <field name="name">1981</field>
+        </record>
+        <record id="year_1982" model="workshop.vehicle.year">
+            <field name="name">1982</field>
+        </record>
+        <record id="year_1983" model="workshop.vehicle.year">
+            <field name="name">1983</field>
+        </record>
+        <record id="year_1984" model="workshop.vehicle.year">
+            <field name="name">1984</field>
+        </record>
+        <record id="year_1985" model="workshop.vehicle.year">
+            <field name="name">1985</field>
+        </record>
+        <record id="year_1986" model="workshop.vehicle.year">
+            <field name="name">1986</field>
+        </record>
+        <record id="year_1987" model="workshop.vehicle.year">
+            <field name="name">1987</field>
+        </record>
+        <record id="year_1988" model="workshop.vehicle.year">
+            <field name="name">1988</field>
+        </record>
+        <record id="year_1989" model="workshop.vehicle.year">
+            <field name="name">1989</field>
+        </record>
+        <record id="year_1990" model="workshop.vehicle.year">
+            <field name="name">1990</field>
+        </record>
+        <record id="year_1991" model="workshop.vehicle.year">
+            <field name="name">1991</field>
+        </record>
+        <record id="year_1992" model="workshop.vehicle.year">
+            <field name="name">1992</field>
+        </record>
+        <record id="year_1993" model="workshop.vehicle.year">
+            <field name="name">1993</field>
+        </record>
+        <record id="year_1994" model="workshop.vehicle.year">
+            <field name="name">1994</field>
+        </record>
+        <record id="year_1995" model="workshop.vehicle.year">
+            <field name="name">1995</field>
+        </record>
+        <record id="year_1996" model="workshop.vehicle.year">
+            <field name="name">1996</field>
+        </record>
+        <record id="year_1997" model="workshop.vehicle.year">
+            <field name="name">1997</field>
+        </record>
+        <record id="year_1998" model="workshop.vehicle.year">
+            <field name="name">1998</field>
+        </record>
+        <record id="year_1999" model="workshop.vehicle.year">
+            <field name="name">1999</field>
+        </record>
+        <record id="year_2000" model="workshop.vehicle.year">
+            <field name="name">2000</field>
+        </record>
+        <record id="year_2001" model="workshop.vehicle.year">
+            <field name="name">2001</field>
+        </record>
+        <record id="year_2002" model="workshop.vehicle.year">
+            <field name="name">2002</field>
+        </record>
+        <record id="year_2003" model="workshop.vehicle.year">
+            <field name="name">2003</field>
+        </record>
+        <record id="year_2004" model="workshop.vehicle.year">
+            <field name="name">2004</field>
+        </record>
+        <record id="year_2005" model="workshop.vehicle.year">
+            <field name="name">2005</field>
+        </record>
+        <record id="year_2006" model="workshop.vehicle.year">
+            <field name="name">2006</field>
+        </record>
+        <record id="year_2007" model="workshop.vehicle.year">
+            <field name="name">2007</field>
+        </record>
+        <record id="year_2008" model="workshop.vehicle.year">
+            <field name="name">2008</field>
+        </record>
+        <record id="year_2009" model="workshop.vehicle.year">
+            <field name="name">2009</field>
+        </record>
+        <record id="year_2010" model="workshop.vehicle.year">
+            <field name="name">2010</field>
+        </record>
+        <record id="year_2011" model="workshop.vehicle.year">
+            <field name="name">2011</field>
+        </record>
+        <record id="year_2012" model="workshop.vehicle.year">
+            <field name="name">2012</field>
+        </record>
+        <record id="year_2013" model="workshop.vehicle.year">
+            <field name="name">2013</field>
+        </record>
+        <record id="year_2014" model="workshop.vehicle.year">
+            <field name="name">2014</field>
+        </record>
+        <record id="year_2015" model="workshop.vehicle.year">
+            <field name="name">2015</field>
+        </record>
+        <record id="year_2016" model="workshop.vehicle.year">
+            <field name="name">2016</field>
+        </record>
+
+    <!-- Vehicle Colors -->
+        <!-- <record id="color_black" model="workshop.vehicle.color">
+            <field name="name">black</field>
+        </record>
+        <record id="color_red" model="workshop.vehicle.color">
+            <field name="name">red</field>
+        </record>
+        <record id="color_green" model="workshop.vehicle.color">
+            <field name="name">green</field>
+        </record> -->
+
+    <!-- Vehicle States -->
+<!--         <record id="vehicle_in" model="workshop.vehicle.state">
+            <field name="name">In the Workshop</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="vehicle_state_out" model="workshop.vehicle.state">
+            <field name="name">Out of the Workshop</field>
+            <field name="sequence">2</field>
+        </record>
+
+
+ -->
+     </data>
+</openerp>
